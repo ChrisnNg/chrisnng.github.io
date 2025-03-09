@@ -1,15 +1,15 @@
 import { InlineCode } from "@/once-ui/components";
 
 const person = {
-  firstName: "Selene",
-  lastName: "Yu",
+  firstName: "Christopher",
+  lastName: "Ng",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Design Engineer",
+  role: "Software Engineer",
   avatar: "/images/avatar.jpg",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  location: "America/Vancouver", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["English", "Cantonese"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter = {
@@ -17,8 +17,8 @@ const newsletter = {
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
   description: (
     <>
-      I occasionally write about design, technology, and share thoughts on the intersection of
-      creativity and engineering.
+      I occasionally write about design, technology, and share thoughts on the
+      intersection of creativity and engineering.
     </>
   ),
 };
@@ -29,12 +29,12 @@ const social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
+    link: "https://github.com/ChrisnNg",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/christopherkyleng/",
   },
   {
     name: "X",
@@ -44,7 +44,7 @@ const social = [
   {
     name: "Email",
     icon: "email",
-    link: "mailto:example@gmail.com",
+    link: "mailto:christopherkyleng@gmail.com",
   },
 ];
 
@@ -52,11 +52,13 @@ const home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Design engineer and builder</>,
+  headline: <>Hi, My name is Christopher</>,
   subline: (
     <>
-      I'm Selene, a design engineer at <InlineCode>FLY</InlineCode>, where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+      I am a product focused <InlineCode>Software Engineer</InlineCode> with
+      four years of experience. I'm recognized for my tenacity and ability to
+      solve problems and I love to build secure, reliable, and user friendly web
+      applications that can scale.
     </>
   ),
 };
@@ -81,9 +83,10 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Hi, My name is Chris I am a product focused software engineer with four
+        years of experience. I'm recognized for my tenacity and ability to solve
+        problems and I love to build secure, reliable, and user friendly web
+        applications that can scale.
       </>
     ),
   },
@@ -92,17 +95,40 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Broadridge",
+        timeframe: "Feb 2020 - Jun 2023",
+        role: "Associate Software Engineer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Developed a proof-of-concept application that secured a contract
+            with a top global industry leader generating millions in revenue.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Spearheaded streamlining deployment processes to reduce production
+            deployment errors to zero. Saving one hundred combined team hours
+            per error prevented.
+          </>,
+          <>
+            Interviewed and trained 8 team members while documenting knowledge
+            to streamline the onboarding procedures.
+          </>,
+          <>
+            Updated hundreds of thousands of production records with strict
+            criteria to modernize specifically targeted data records. Kept
+            client data consistent with new and incoming data records so systems
+            could be streamlined to accept data types with fewer variety.
+          </>,
+          <>
+            Investigated and resolved critical system problems and real-time
+            production issues to maintain client trust and expectations.
+          </>,
+          <>
+            Researched, developed, and tested new products, system enhancements
+            and defects to expand services and capabilities.
+          </>,
+          <>
+            Designed and improved User interfaces and APIs after proactively
+            engaging clients for feedback.
           </>,
         ],
         images: [
@@ -115,22 +141,6 @@ const about = {
           },
         ],
       },
-      {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
-        achievements: [
-          <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
-          </>,
-          <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
-          </>,
-        ],
-        images: [],
-      },
     ],
   },
   studies: {
@@ -138,12 +148,17 @@ const about = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "University of British Columbia",
+        description: <>Studied Psychology.</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Lighthouse Labs",
+        description: (
+          <>
+            An intensive 12-week full-course bootcamp to develop full-stack
+            skills
+          </>
+        ),
       },
     ],
   },
@@ -152,8 +167,10 @@ const about = {
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
+        title: "React.js",
+        description: (
+          <>Building next gen apps with React.js + Bootstrap and Express</>
+        ),
         // optional: leave the array empty if you don't want to display images
         images: [
           {
@@ -172,7 +189,9 @@ const about = {
       },
       {
         title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
+        description: (
+          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+        ),
         // optional: leave the array empty if you don't want to display images
         images: [
           {
