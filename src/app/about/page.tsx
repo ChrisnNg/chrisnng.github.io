@@ -209,7 +209,7 @@ export default function About() {
                           variant="secondary"
                         />
                       </>
-                    )
+                    ),
                 )}
               </Flex>
             )}
@@ -275,7 +275,7 @@ export default function About() {
                           >
                             {achievement}
                           </Text>
-                        )
+                        ),
                       )}
                     </Column>
                     {/* {experience.images.length > 0 && (

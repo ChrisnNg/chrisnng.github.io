@@ -33,7 +33,7 @@ export async function generateMetadata(props: BlogParams) {
   const { slug } = params;
 
   let post = getPosts(["src", "app", "blog", "posts"]).find(
-    (post) => post.slug === slug
+    (post) => post.slug === slug,
   );
 
   if (!post) {
@@ -80,7 +80,7 @@ export async function generateMetadata(props: BlogParams) {
 export default async function Blog(props: BlogParams) {
   const params = await props.params;
   let post = getPosts(["src", "app", "blog", "posts"]).find(
-    (post) => post.slug === params.slug
+    (post) => post.slug === params.slug,
   );
 
   if (!post) {
