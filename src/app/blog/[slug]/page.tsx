@@ -1,16 +1,23 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Button, Column, Heading, Row, Text } from "@/once-ui/components";
+import {
+  AvatarGroup,
+  Button,
+  Column,
+  Heading,
+  Row,
+  Text,
+} from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import { person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
 
 interface BlogParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
@@ -20,8 +27,14 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   }));
 }
 
-export function generateMetadata({ params: { slug } }: BlogParams) {
-  let post = getPosts(["src", "app", "blog", "posts"]).find((post) => post.slug === slug);
+export async function generateMetadata(props: BlogParams) {
+  const params = await props.params;
+
+  const { slug } = params;
+
+  let post = getPosts(["src", "app", "blog", "posts"]).find(
+    (post) => post.slug === slug
+  );
 
   if (!post) {
     return;
@@ -34,8 +47,11 @@ export function generateMetadata({ params: { slug } }: BlogParams) {
     images,
     image,
     team,
+    externalLink,
   } = post.metadata;
-  let ogImage = image ? `https://${baseURL}${image}` : `https://${baseURL}/og?title=${title}`;
+  let ogImage = image
+    ? `https://${baseURL}${image}`
+    : `https://${baseURL}/og?title=${title}`;
 
   return {
     title,
@@ -61,8 +77,11 @@ export function generateMetadata({ params: { slug } }: BlogParams) {
   };
 }
 
-export default function Blog({ params }: BlogParams) {
-  let post = getPosts(["src", "app", "blog", "posts"]).find((post) => post.slug === params.slug);
+export default async function Blog(props: BlogParams) {
+  const params = await props.params;
+  let post = getPosts(["src", "app", "blog", "posts"]).find(
+    (post) => post.slug === params.slug
+  );
 
   if (!post) {
     notFound();
@@ -97,7 +116,13 @@ export default function Blog({ params }: BlogParams) {
           }),
         }}
       />
-      <Button href="/blog" weight="default" variant="tertiary" size="s" prefixIcon="chevronLeft">
+      <Button
+        href="/blog"
+        weight="default"
+        variant="tertiary"
+        size="s"
+        prefixIcon="chevronLeft"
+      >
         Posts
       </Button>
       <Heading variant="display-strong-s">{post.metadata.title}</Heading>
@@ -107,9 +132,11 @@ export default function Blog({ params }: BlogParams) {
           {formatDate(post.metadata.publishedAt)}
         </Text>
       </Row>
+      {/* error below */}
       <Column as="article" fillWidth>
         <CustomMDX source={post.content} />
       </Column>
+      {/* error above */}
       <ScrollToHash />
     </Column>
   );

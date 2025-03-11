@@ -1,6 +1,14 @@
 "use client";
 
-import { Column, Flex, Heading, SmartImage, SmartLink, Tag, Text } from "@/once-ui/components";
+import {
+  Column,
+  Flex,
+  Heading,
+  SmartImage,
+  SmartLink,
+  Tag,
+  Text,
+} from "@/once-ui/components";
 import styles from "./Posts.module.scss";
 import { formatDate } from "@/app/utils/formatDate";
 
@@ -16,7 +24,11 @@ export default function Post({ post, thumbnail }: PostProps) {
       className={styles.hover}
       unstyled
       key={post.slug}
-      href={`/blog/${post.slug}`}
+      href={
+        post.metadata.externalLink
+          ? post.metadata.externalLink
+          : `/blog/${post.slug}`
+      }
     >
       <Flex
         position="relative"
