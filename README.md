@@ -13,6 +13,7 @@
 - Work page
 
   - add all projects
+  - add and expand on the case study button?
 
 - Blog page
 
