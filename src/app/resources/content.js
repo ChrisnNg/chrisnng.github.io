@@ -76,7 +76,7 @@ const about = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://cal.com/christopherkyleng",
   },
   intro: {
     display: true,
@@ -149,7 +149,7 @@ const about = {
     institutions: [
       {
         name: "University of British Columbia",
-        description: <>Studied Psychology.</>,
+        description: <>Psychology</>,
       },
       {
         name: "Lighthouse Labs",
