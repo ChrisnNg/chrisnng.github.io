@@ -217,8 +217,8 @@ const about = {
         title: "Testing Suites",
         description: (
           <>
-            Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium,
-            Mocha,{" "}
+            Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium, Mocha,
+            PhantomJS{" "}
           </>
         ),
       },
