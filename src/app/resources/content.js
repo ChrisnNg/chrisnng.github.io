@@ -160,6 +160,12 @@ const about = {
           </>
         ),
       },
+      {
+        name: "Harvard University",
+        description: (
+          <>CS50 Harvard's Introduction to Computer Science and Programming</>
+        ),
+      },
     ],
   },
   technical: {
@@ -167,40 +173,54 @@ const about = {
     title: "Technical skills",
     skills: [
       {
-        title: "React.js",
+        title: "Languages",
         description: (
-          <>Building next gen apps with React.js + Bootstrap and Express</>
+          <>
+            Javascript, HTML, CSS, Python, Golang, Ruby, C, SQL, SASS,
+            Shellscript, Batch Script, JSX, Markdown
+          </>
         ),
         // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        // images: [
+        //   {
+        //     src: "/images/projects/project-01/cover-02.jpg",
+        //     alt: "Project image",
+        //     width: 16,
+        //     height: 9,
+        //   },
+        //   {
+        //     src: "/images/projects/project-01/cover-03.jpg",
+        //     alt: "Project image",
+        //     width: 16,
+        //     height: 9,
+        //   },
+        // ],
       },
       {
-        title: "Next.js",
+        title: "Frameworks",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>
+            React.js, Next.js, Express.js, Node.js, Vue.js, Jquery,
+            Bootstrap{" "}
+          </>
         ),
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+      },
+      // {
+      //   title: "Tools",
+      //   description: <>Git, Gitlabs </>,
+      // },
+      // {
+      //   title: "Libraries",
+      //   description: <>Jquery </>,
+      // },
+      {
+        title: "Testing Suites",
+        description: (
+          <>
+            Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium,
+            Mocha,{" "}
+          </>
+        ),
       },
     ],
   },
