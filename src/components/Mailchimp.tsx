@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import styles from "@/components/about/about.module.scss";
 import { about } from "@/app/resources/content";
+import React from "react";
 
 function debounce<T extends (...args: any[]) => void>(
   func: T,
@@ -29,8 +30,8 @@ function debounce<T extends (...args: any[]) => void>(
 
 type NewsletterProps = {
   display: boolean;
-  title: string | JSX.Element;
-  description: string | JSX.Element;
+  title: string | React.JSX.Element;
+  description: string | React.JSX.Element;
 };
 
 export const Callchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
