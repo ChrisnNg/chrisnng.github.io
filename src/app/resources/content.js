@@ -260,7 +260,7 @@ const gallery = {
     {
       src: "/images/gallery/img-03.jpg",
       alt: "image",
-      orientation: "horizontal",
+      orientation: "vertical",
     },
     {
       src: "/images/gallery/img-04.jpeg",
@@ -284,11 +284,6 @@ const gallery = {
     },
     {
       src: "/images/gallery/img-08.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/img-09.jpg",
       alt: "image",
       orientation: "vertical",
     },
