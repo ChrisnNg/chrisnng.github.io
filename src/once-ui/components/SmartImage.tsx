@@ -10,7 +10,7 @@ export interface SmartImageProps extends React.ComponentProps<typeof Flex> {
   height?: number;
   alt?: string;
   isLoading?: boolean;
-  objectFit?: CSSProperties["objectFit"];
+  objectFit?: any;
   enlarge?: boolean;
   src: string;
   unoptimized?: boolean;
