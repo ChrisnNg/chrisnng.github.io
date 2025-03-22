@@ -3,12 +3,13 @@ import { baseURL } from "@/app/resources";
 import { person } from "@/app/resources/content";
 
 export const runtime = "edge";
+export const dynamic = "force-static";
 
 export async function GET(request: Request) {
   let url = new URL(request.url);
   let title = url.searchParams.get("title") || "Portfolio";
   const font = fetch(
-    new URL("../../../public/fonts/Inter.ttf", import.meta.url),
+    new URL("../../../public/fonts/Inter.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
   const fontData = await font;
 
@@ -104,6 +105,6 @@ export async function GET(request: Request) {
           style: "normal",
         },
       ],
-    },
+    }
   );
 }
