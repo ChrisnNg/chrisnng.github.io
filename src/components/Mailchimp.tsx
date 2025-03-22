@@ -9,12 +9,16 @@ import {
   Text,
   Background,
   Column,
+  Icon,
+  IconButton,
 } from "@/once-ui/components";
 import { useState } from "react";
+import styles from "@/components/about/about.module.scss";
+import { about } from "@/app/resources/content";
 
 function debounce<T extends (...args: any[]) => void>(
   func: T,
-  delay: number,
+  delay: number
 ): T {
   let timeout: ReturnType<typeof setTimeout>;
   return ((...args: Parameters<T>) => {
@@ -27,6 +31,115 @@ type NewsletterProps = {
   display: boolean;
   title: string | JSX.Element;
   description: string | JSX.Element;
+};
+
+export const Callchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
+  return (
+    <Column
+      overflow="hidden"
+      position="relative"
+      fillWidth
+      padding="xl"
+      radius="l"
+      marginBottom="m"
+      horizontal="center"
+      align="center"
+      background="surface"
+      border="neutral-medium"
+    >
+      <Background
+        mask={{
+          cursor: mailchimp.effects.mask.cursor,
+          x: mailchimp.effects.mask.x,
+          y: mailchimp.effects.mask.y,
+          radius: mailchimp.effects.mask.radius,
+        }}
+        gradient={{
+          display: mailchimp.effects.gradient.display,
+          x: mailchimp.effects.gradient.x,
+          y: mailchimp.effects.gradient.y,
+          width: mailchimp.effects.gradient.width,
+          height: mailchimp.effects.gradient.height,
+          tilt: mailchimp.effects.gradient.tilt,
+          colorStart: mailchimp.effects.gradient.colorStart,
+          colorEnd: mailchimp.effects.gradient.colorEnd,
+          opacity: mailchimp.effects.gradient.opacity as
+            | 0
+            | 10
+            | 20
+            | 30
+            | 40
+            | 50
+            | 60
+            | 70
+            | 80
+            | 90
+            | 100,
+        }}
+        dots={{
+          display: mailchimp.effects.dots.display,
+          color: mailchimp.effects.dots.color,
+          size: mailchimp.effects.dots.size as any,
+          opacity: mailchimp.effects.dots.opacity as any,
+        }}
+        grid={{
+          display: mailchimp.effects.grid.display,
+          color: mailchimp.effects.grid.color,
+          width: mailchimp.effects.grid.width as any,
+          height: mailchimp.effects.grid.height as any,
+          opacity: mailchimp.effects.grid.opacity as any,
+        }}
+        lines={{
+          display: mailchimp.effects.lines.display,
+          opacity: mailchimp.effects.lines.opacity as any,
+        }}
+      />
+      <Heading
+        style={{ position: "relative" }}
+        marginBottom="s"
+        variant="display-strong-xs"
+      >
+        {newsletter.title}
+      </Heading>
+      <Text
+        style={{
+          position: "relative",
+          maxWidth: "var(--responsive-width-xs)",
+        }}
+        wrap="balance"
+        marginBottom="l"
+        onBackground="neutral-medium"
+      >
+        {newsletter.description}
+      </Text>
+      {/* where form was */}
+      {about.calendar.display && (
+        <Flex
+          fitWidth
+          border="brand-alpha-medium"
+          className={styles.blockAlign}
+          style={{
+            backdropFilter: "blur(var(--static-space-1))",
+          }}
+          background="brand-alpha-weak"
+          radius="full"
+          padding="4"
+          gap="8"
+          marginBottom="m"
+          vertical="center"
+        >
+          <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
+          <Flex paddingX="8">Schedule a call</Flex>
+          <IconButton
+            href={about.calendar.link}
+            data-border="rounded"
+            variant="secondary"
+            icon="chevronRight"
+          />
+        </Flex>
+      )}
+    </Column>
+  );
 };
 
 export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {

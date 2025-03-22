@@ -23,6 +23,12 @@ const newsletter = {
   ),
 };
 
+const callletter = {
+  display: true,
+  title: <>Schedule a call with {person.firstName}</>,
+  description: <>Avaliable on Discord, Google Meet, and Cal Video. </>,
+};
+
 const social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
@@ -290,4 +296,14 @@ const gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+export {
+  person,
+  social,
+  newsletter,
+  home,
+  about,
+  blog,
+  work,
+  gallery,
+  callletter,
+};

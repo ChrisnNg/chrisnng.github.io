@@ -13,8 +13,15 @@ import {
 } from "@/once-ui/components";
 import { Projects } from "@/components/work/Projects";
 
+import { Callchimp } from "@/components";
 import { baseURL, routes } from "@/app/resources";
-import { home, about, person, newsletter } from "@/app/resources/content";
+import {
+  home,
+  about,
+  person,
+  newsletter,
+  callletter,
+} from "@/app/resources/content";
 import { Posts } from "@/components/blog/Posts";
 import styles from "@/components/about/about.module.scss";
 
@@ -138,31 +145,7 @@ export default function Home() {
         </Flex>
       )}
       <Projects range={[2]} />
-      {about.calendar.display && (
-        <Flex
-          fitWidth
-          border="brand-alpha-medium"
-          className={styles.blockAlign}
-          style={{
-            backdropFilter: "blur(var(--static-space-1))",
-          }}
-          background="brand-alpha-weak"
-          radius="full"
-          padding="4"
-          gap="8"
-          marginBottom="m"
-          vertical="center"
-        >
-          <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-          <Flex paddingX="8">Schedule a call</Flex>
-          <IconButton
-            href={about.calendar.link}
-            data-border="rounded"
-            variant="secondary"
-            icon="chevronRight"
-          />
-        </Flex>
-      )}
+      {callletter.display && <Callchimp newsletter={callletter} />}
     </Column>
   );
 }
