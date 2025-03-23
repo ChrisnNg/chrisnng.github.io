@@ -150,13 +150,10 @@ const SmartImage: React.FC<SmartImageProps> = ({
           />
         )}
         {!isLoading && !isVideo && !isYouTube && (
-          <Image
+          <img
             src={src}
             alt={alt}
-            priority={priority}
             sizes={sizes}
-            unoptimized={unoptimized}
-            fill
             style={{
               objectFit: objectFit,
             }}
