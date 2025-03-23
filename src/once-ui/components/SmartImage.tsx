@@ -23,7 +23,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   height,
   alt = "",
   isLoading = false,
-  objectFit = "fit",
+  objectFit = "cover",
   enlarge = false,
   src,
   unoptimized = false,
@@ -156,6 +156,9 @@ const SmartImage: React.FC<SmartImageProps> = ({
             sizes={sizes}
             style={{
               objectFit: objectFit,
+              position: "absolute",
+              height: "100%",
+              width: "100%",
             }}
           />
         )}
@@ -207,7 +210,10 @@ const SmartImage: React.FC<SmartImageProps> = ({
                 sizes="90vw"
                 unoptimized={unoptimized}
                 style={{
-                  objectFit: "contain",
+                  objectFit: objectFit,
+                  position: "absolute",
+                  height: "100%",
+                  width: "100%",
                 }}
               />
             )}
