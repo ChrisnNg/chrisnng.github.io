@@ -10,7 +10,8 @@
     "lint": "next lint",
     "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d out --dotfiles"
+    "deploy": "gh-pages -d out --dotfiles",
+    "fulldeploy": "npm run build && gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.2",
