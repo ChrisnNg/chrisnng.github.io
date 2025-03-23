@@ -1,31 +1,3 @@
-# **TO DO**
-
-- Trackers
-
-- Landing page
-
-  - subscribe button
-
-- About page
-
-  - technical skills
-
-- Work page
-
-  - add all projects
-  - add and expand on the case study button?
-
-- Blog page
-
-  - maybe add pair programming
-
-- Gallery
-  - ??
-
-# **Build your portfolio with Once UI's Magic Portfolio**
-
-View the [demo here](https://demo.magic-portfolio.com).
-
 # **Getting started**
 
 Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
@@ -95,7 +67,7 @@ Add a new .mdx file to src/app/blog/posts or src/app/work/projects
 - A localized version of Magic Portfolio is available with the next-intl library
 - To use localization, switch to the 'i18n' branch
 
-# **Authors**
+# **Authors of Magic Portfolio**
 
 Connect with us on Threads or LinkedIn.
 
@@ -103,11 +75,6 @@ Lorant Toth: [Threads](https://www.threads.net/@lorant.one), [LinkedIn](https://
 Zsofia Komaromi: [Threads](https://www.threads.net/@zsofia_kom), [LinkedIn](https://www.linkedin.com/in/zsofiakomaromi/)
 
 Localization added by [François Hernandez](https://github.com/francoishernandez)
-
-# **Get involved**
-
-- Join the [Design Engineers Club on Discord](https://discord.com/invite/5EyAQ4eNdS) and share your portfolio with us!
-- Report a [bug](https://github.com/once-ui-system/magic-portfolio/issues/new?labels=bug&template=bug_report.md).
 
 # **License**
 
