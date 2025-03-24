@@ -1,3 +1,8 @@
+TODO
+
+Meta-data for when sending site as a link
+badges for languages used in project
+
 # **Getting started**
 
 Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.

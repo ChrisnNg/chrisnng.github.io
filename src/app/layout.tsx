@@ -12,6 +12,10 @@ import { Source_Code_Pro } from "next/font/google";
 import { person, home } from "@/app/resources/content";
 import { Background, Column, Flex, ToastProvider } from "@/once-ui/components";
 
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
+
 export async function generateMetadata() {
   return {
     metadataBase: new URL(`https://${baseURL}`),
@@ -87,7 +91,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         primary.variable,
         secondary ? secondary.variable : "",
         tertiary ? tertiary.variable : "",
-        code.variable,
+        code.variable
       )}
     >
       <ToastProvider>

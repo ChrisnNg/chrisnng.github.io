@@ -16,6 +16,9 @@ import {
   gallery,
 } from "@/app/resources/content";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faCloudMoon } from "@fortawesome/free-solid-svg-icons";
+
 type TimeDisplayProps = {
   timeZone: string;
   locale?: string; // Optionally allow locale, defaulting to 'en-GB'
@@ -47,7 +50,18 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
     return () => clearInterval(intervalId);
   }, [timeZone, locale]);
 
-  return <>{currentTime}</>;
+  let timeIcon =
+    Number(currentTime.slice(0, 2)) <= 12 ? (
+      <FontAwesomeIcon icon={faSun} className="fa-fw" />
+    ) : (
+      <FontAwesomeIcon icon={faCloudMoon} className="fa-fw" />
+    );
+
+  return (
+    <>
+      {currentTime} {timeIcon}
+    </>
+  );
 };
 
 export default TimeDisplay;
