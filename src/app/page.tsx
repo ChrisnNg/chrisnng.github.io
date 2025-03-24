@@ -80,7 +80,7 @@ export default function Home() {
         }}
       />
       <Column fillWidth paddingY="l" gap="m">
-        <Column maxWidth="s">
+        <Column className={styles.infosnippet} maxWidth="s">
           <RevealFx
             translateY="4"
             fillWidth
