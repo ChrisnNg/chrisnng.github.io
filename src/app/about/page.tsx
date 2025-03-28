@@ -67,6 +67,11 @@ export default function About() {
       display: about.technical.display,
       items: about.technical.skills.map((skill) => skill.title),
     },
+    {
+      title: about.projects.title,
+      display: about.projects.display,
+      items: about.projects.project.map((project) => project.title),
+    },
   ];
   return (
     <Column maxWidth="m">
@@ -349,7 +354,7 @@ export default function About() {
                 as="h2"
                 id={about.technical.title}
                 variant="display-strong-s"
-                marginBottom="40"
+                marginBottom="m"
               >
                 {about.technical.title}
               </Heading>
@@ -363,6 +368,57 @@ export default function About() {
                     {skill.images && skill.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {skill.images.map((image, index) => (
+                          <Flex
+                            key={index}
+                            border="neutral-medium"
+                            radius="m"
+                            //@ts-ignore
+                            minWidth={image.width}
+                            //@ts-ignore
+                            height={image.height}
+                          >
+                            <SmartImage
+                              enlarge
+                              radius="m"
+                              //@ts-ignore
+                              sizes={image.width.toString()}
+                              //@ts-ignore
+                              alt={image.alt}
+                              //@ts-ignore
+                              src={image.src}
+                            />
+                          </Flex>
+                        ))}
+                      </Flex>
+                    )}
+                  </Column>
+                ))}
+              </Column>
+            </>
+          )}
+
+          {about.projects.display && (
+            <>
+              <Heading
+                as="h2"
+                id={about.projects.title}
+                variant="display-strong-s"
+                marginBottom="20"
+                marginTop="40"
+                className={styles.fancyFont}
+              >
+                {about.projects.title}
+              </Heading>
+              <Column fillWidth gap="l">
+                {about.projects.project.map((project, index) => (
+                  <Column key={`${project}-${index}`} fillWidth gap="4">
+                    {/* <Text variant="heading-strong-l">{project.title}</Text> */}
+                    <Text variant="body-default-m" onBackground="neutral-weak">
+                      {project.description}
+                    </Text>
+                    {project.images && project.images.length > 0 && (
+                      <Flex fillWidth paddingTop="m" gap="12" wrap>
+                        {project.images.map((image, index) => (
                           <Flex
                             key={index}
                             border="neutral-medium"

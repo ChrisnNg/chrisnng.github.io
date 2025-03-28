@@ -218,8 +218,14 @@ const about = {
           </>
         ),
       },
+    ],
+  },
+  projects: {
+    display: true, // set to false to hide this section
+    title: "Projects",
+    project: [
       {
-        title: "Projects",
+        title: "",
         description: (
           <>
             <a href="/work" className={styles.fancyFont}>
