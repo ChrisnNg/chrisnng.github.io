@@ -1,4 +1,5 @@
 import { InlineCode } from "@/once-ui/components";
+import styles from "@/components/about/about.module.scss";
 
 const person = {
   firstName: "Christopher",
@@ -101,7 +102,7 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "Broadridge",
+        company: "Broadridge Financial Solutions",
         timeframe: "Feb 2020 - Jun 2023",
         role: "Associate Software Engineer",
         achievements: [
@@ -189,13 +190,13 @@ const about = {
         // optional: leave the array empty if you don't want to display images
         // images: [
         //   {
-        //     src: "/images/projects/project-01/cover-02.jpg",
+        //     src: "/images/projects/project-01/cover-01.gif",
         //     alt: "Project image",
         //     width: 16,
         //     height: 9,
         //   },
         //   {
-        //     src: "/images/projects/project-01/cover-03.jpg",
+        //     src: "/images/projects/project-02/cover-01.gif",
         //     alt: "Project image",
         //     width: 16,
         //     height: 9,
@@ -205,28 +206,71 @@ const about = {
       {
         title: "Frameworks",
         description: (
-          <>
-            React.js, Next.js, Express.js, Node.js, Vue.js, Jquery,
-            Bootstrap{" "}
-          </>
+          <>React.js, Next.js, Express.js, Node.js, Vue.js, Jquery, Bootstrap</>
         ),
       },
-      // {
-      //   title: "Tools",
-      //   description: <>Git, Gitlabs </>,
-      // },
-      // {
-      //   title: "Libraries",
-      //   description: <>Jquery </>,
-      // },
       {
         title: "Testing Suites",
         description: (
           <>
             Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium, Mocha,
-            PhantomJS{" "}
+            PhantomJS
           </>
         ),
+      },
+      {
+        title: "Projects",
+        description: (
+          <>
+            <a href="/work" className={styles.fancyFont}>
+              Full overview
+            </a>
+          </>
+        ),
+        images: [
+          {
+            src: "/images/projects/project-01/cover-01.gif",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-02/cover-01.gif",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-03/cover-01.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-04/cover-01.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-05/cover-01.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-06/cover-01.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-07/cover-01.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
     ],
   },
