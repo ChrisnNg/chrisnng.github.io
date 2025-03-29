@@ -405,7 +405,6 @@ export default function About() {
                 variant="display-strong-s"
                 marginBottom="20"
                 marginTop="40"
-                className={styles.fancyFont}
               >
                 {about.projects.title}
               </Heading>

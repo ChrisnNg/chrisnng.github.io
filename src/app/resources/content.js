@@ -228,9 +228,7 @@ const about = {
         title: "",
         description: (
           <>
-            <a href="/work" className={styles.fancyFont}>
-              Full overview
-            </a>
+            <a href="/work">Full overview</a>
           </>
         ),
         images: [
