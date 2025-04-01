@@ -421,21 +421,21 @@ export default function About() {
                           <Flex
                             key={index}
                             border="neutral-medium"
-                            radius="m"
+                            radius="l"
                             //@ts-ignore
                             minWidth={image.width}
                             //@ts-ignore
                             height={image.height}
+                            className={styles.projectspacing}
                           >
-                            <SmartImage
-                              enlarge
-                              radius="m"
+                            <img
                               //@ts-ignore
-                              sizes={image.width.toString()}
+                              // sizes={image.width.toString()}
                               //@ts-ignore
                               alt={image.alt}
                               //@ts-ignore
                               src={image.src}
+                              className={styles.projectsimg}
                             />
                           </Flex>
                         ))}

@@ -1,4 +1,4 @@
-import { InlineCode } from "@/once-ui/components";
+import { InlineCode, Kbd } from "@/once-ui/components";
 import styles from "@/components/about/about.module.scss";
 
 const person = {
@@ -228,51 +228,53 @@ const about = {
         title: "",
         description: (
           <>
-            <a href="/work">Full overview</a>
+            <a href="/work">
+              <Kbd>Full overview</Kbd>
+            </a>
           </>
         ),
         images: [
           {
             src: "/images/projects/project-01/cover-01.gif",
             alt: "Project image",
-            width: 16,
-            height: 9,
+            width: 19.6,
+            height:10,
           },
           {
             src: "/images/projects/project-02/cover-01.gif",
             alt: "Project image",
-            width: 16,
-            height: 9,
+            width: 19.6,
+            height:10,
           },
           {
             src: "/images/projects/project-03/cover-01.png",
             alt: "Project image",
-            width: 16,
-            height: 9,
+            width: 19.6,
+            height:10,
           },
           {
             src: "/images/projects/project-04/cover-01.png",
             alt: "Project image",
-            width: 16,
-            height: 9,
+            width: 19.6,
+            height:10,
           },
           {
             src: "/images/projects/project-05/cover-01.png",
             alt: "Project image",
-            width: 16,
-            height: 9,
+            width: 19.6,
+            height:10,
           },
           {
             src: "/images/projects/project-06/cover-01.png",
             alt: "Project image",
-            width: 16,
-            height: 9,
+            width: 19.6,
+            height:10,
           },
           {
             src: "/images/projects/project-07/cover-01.png",
             alt: "Project image",
-            width: 16,
-            height: 9,
+            width: 19.6,
+            height:10,
           },
         ],
       },
