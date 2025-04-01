@@ -9,6 +9,7 @@ import {
   SmartImage,
   Tag,
   Text,
+  RevealFx
 } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
@@ -226,9 +227,15 @@ export default function About() {
               textVariant="body-default-l"
               fillWidth
               gap="m"
-              marginBottom="xl"
+              marginBottom="m"
             >
-              {about.intro.description}
+              <RevealFx
+                translateY={5}
+                fillWidth
+                horizontal="start"
+              >
+                {about.intro.description}
+              </RevealFx>
             </Column>
           )}
 
@@ -240,9 +247,16 @@ export default function About() {
                 variant="display-strong-s"
                 marginBottom="m"
               >
-                {about.work.title}
+                <RevealFx
+                  translateY={5}
+                  fillWidth
+                  horizontal="start"
+                  delay={0.5}
+                >
+                  {about.work.title}
+                </RevealFx>
               </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
+              <Column fillWidth gap="l">
                 {about.work.experiences.map((experience, index) => (
                   <Column
                     key={`${experience.company}-${experience.role}-${index}`}
@@ -252,16 +266,29 @@ export default function About() {
                       fillWidth
                       horizontal="space-between"
                       vertical="end"
-                      marginBottom="4"
                     >
                       <Text id={experience.company} variant="heading-strong-l">
-                        {experience.company}
+                        <RevealFx
+                          translateY={5}
+                          fillWidth
+                          horizontal="start"
+                          delay={1}
+                        > 
+                          {experience.company}
+                        </RevealFx>
                       </Text>
                       <Text
                         variant="heading-default-xs"
                         onBackground="neutral-weak"
                       >
+                        <RevealFx
+                          translateY={5}
+                          fillWidth
+                          horizontal="start"
+                          delay={0.75}
+                        > 
                         {experience.timeframe}
+                        </RevealFx>
                       </Text>
                     </Flex>
                     <Text
@@ -269,7 +296,14 @@ export default function About() {
                       onBackground="brand-weak"
                       marginBottom="m"
                     >
-                      {experience.role}
+                      <RevealFx
+                        translateY={5}
+                        fillWidth
+                        horizontal="start"
+                        delay={1}
+                      > 
+                        {experience.role}
+                      </RevealFx>
                     </Text>
                     <Column as="ul" gap="16">
                       {experience.achievements.map(
@@ -278,8 +312,16 @@ export default function About() {
                             as="li"
                             variant="body-default-m"
                             key={`${experience.company}-${index}`}
+                            className={styles.bulletpoints}
                           >
-                            {achievement}
+                            <RevealFx
+                              translateY={5}
+                              fillWidth
+                              horizontal="center"
+                              delay={1 + index/3}
+                            > 
+                              {achievement}
+                            </RevealFx>
                           </Text>
                         )
                       )}
@@ -324,7 +366,14 @@ export default function About() {
                 variant="display-strong-s"
                 marginBottom="m"
               >
-                {about.studies.title}
+                <RevealFx
+                  translateY={5}
+                  fillWidth
+                  horizontal="start"
+                  delay={3.5}
+                  > 
+                    {about.studies.title}
+                  </RevealFx>
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
                 {about.studies.institutions.map((institution, index) => (
@@ -334,14 +383,28 @@ export default function About() {
                     gap="4"
                   >
                     <Text id={institution.name} variant="heading-strong-l">
-                      {institution.name}
-                    </Text>
-                    <Text
-                      variant="heading-default-xs"
-                      onBackground="neutral-weak"
-                    >
-                      {institution.description}
-                    </Text>
+                      <RevealFx
+                          translateY={5}
+                          fillWidth
+                          horizontal="start"
+                          delay={3.6}
+                      > 
+                        {institution.name}
+                      </RevealFx>
+                      </Text>
+                      <Text
+                        variant="heading-default-xs"
+                        onBackground="neutral-weak"
+                      >
+                        <RevealFx
+                        translateY={5}
+                        fillWidth
+                        horizontal="start"
+                        delay={3.7}
+                        > 
+                          {institution.description}
+                        </RevealFx>
+                      </Text>
                   </Column>
                 ))}
               </Column>
@@ -355,42 +418,37 @@ export default function About() {
                 id={about.technical.title}
                 variant="display-strong-s"
                 marginBottom="m"
-              >
-                {about.technical.title}
+              >                        
+                <RevealFx
+                translateY={5}
+                fillWidth
+                horizontal="start"
+                delay={3.8}
+                > 
+                  {about.technical.title}
+                </RevealFx>
               </Heading>
               <Column fillWidth gap="l">
                 {about.technical.skills.map((skill, index) => (
                   <Column key={`${skill}-${index}`} fillWidth gap="4">
-                    <Text variant="heading-strong-l">{skill.title}</Text>
-                    <Text variant="body-default-m" onBackground="neutral-weak">
-                      {skill.description}
-                    </Text>
-                    {skill.images && skill.images.length > 0 && (
-                      <Flex fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, index) => (
-                          <Flex
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            //@ts-ignore
-                            minWidth={image.width}
-                            //@ts-ignore
-                            height={image.height}
-                          >
-                            <SmartImage
-                              enlarge
-                              radius="m"
-                              //@ts-ignore
-                              sizes={image.width.toString()}
-                              //@ts-ignore
-                              alt={image.alt}
-                              //@ts-ignore
-                              src={image.src}
-                            />
-                          </Flex>
-                        ))}
-                      </Flex>
-                    )}
+                    <RevealFx
+                        translateY={5}
+                        fillWidth
+                        horizontal="start"
+                        delay={3.9}
+                        > 
+                        <Text variant="heading-strong-l">{skill.title}</Text>
+                      </RevealFx>
+                      <RevealFx
+                        translateY={5}
+                        fillWidth
+                        horizontal="start"
+                        delay={4}
+                        > 
+                        <Text variant="body-default-m" onBackground="neutral-weak">
+                          {skill.description}
+                        </Text>
+                      </RevealFx>
                   </Column>
                 ))}
               </Column>
@@ -406,18 +464,38 @@ export default function About() {
                 marginBottom="20"
                 marginTop="40"
               >
-                {about.projects.title}
+                <RevealFx
+                  translateY={5}
+                  fillWidth
+                  horizontal="start"
+                  delay={4}
+                > 
+                  {about.projects.title}
+                </RevealFx>
               </Heading>
               <Column fillWidth gap="l">
                 {about.projects.project.map((project, index) => (
                   <Column key={`${project}-${index}`} fillWidth gap="4">
                     {/* <Text variant="heading-strong-l">{project.title}</Text> */}
+                      <RevealFx
+                        translateY={5}
+                        fillWidth
+                        horizontal="center"
+                        delay={4.1}
+                      >
                     <Text variant="body-default-m" onBackground="neutral-weak">
-                      {project.description}
+                        {project.description}
                     </Text>
+                      </RevealFx>
                     {project.images && project.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {project.images.map((image, index) => (
+                        <RevealFx
+                          translateY={5}
+                          fillWidth
+                          horizontal="start"
+                          delay={4.2}
+                        > 
                           <Flex
                             key={index}
                             border="neutral-medium"
@@ -428,16 +506,17 @@ export default function About() {
                             height={image.height}
                             className={styles.projectspacing}
                           >
-                            <img
-                              //@ts-ignore
-                              // sizes={image.width.toString()}
-                              //@ts-ignore
-                              alt={image.alt}
-                              //@ts-ignore
-                              src={image.src}
-                              className={styles.projectsimg}
-                            />
+                              <img
+                                //@ts-ignore
+                                // sizes={image.width.toString()}
+                                //@ts-ignore
+                                alt={image.alt}
+                                //@ts-ignore
+                                src={image.src}
+                                className={styles.projectsimg}
+                              />
                           </Flex>
+                        </RevealFx>
                         ))}
                       </Flex>
                     )}
