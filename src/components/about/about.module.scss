@@ -40,16 +40,28 @@
 }
 
 
-  .projectsimg {
-    height: 100%;
-    width: 100%;
-    border-radius: 15px;
-  }
-  
-  .projectspacing {
-    // margin-bottom: 10px;
-    width: 100%;
-    min-height: 250px;
-  }
+.projectsimg {
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+}
 
+.projectspacing {
+  width: 100%;
+  min-height: 250px;
+}
 
+.kbdoverview {
+  background-image: linear-gradient(to bottom right,black, var(--brand-background-strong)); //#0D483C
+  font-weight: var(--font-weight-heading-strong);
+  font-family: var(--font-family-heading);
+}
+
+.stripped {
+  text-decoration: inherit !important;
+  color: inherit;
+}
+
+.kbdoverview:hover {
+  background-image: linear-gradient( var(--brand-background-strong)); //#0D483C
+}

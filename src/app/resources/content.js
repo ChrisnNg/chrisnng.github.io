@@ -1,5 +1,7 @@
 import { InlineCode, Kbd } from "@/once-ui/components";
 import styles from "@/components/about/about.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExpand } from "@fortawesome/free-solid-svg-icons";
 
 const person = {
   firstName: "Christopher",
@@ -228,8 +230,8 @@ const about = {
         title: "",
         description: (
           <>
-            <a href="/work">
-              <Kbd>Full overview</Kbd>
+            <a className={styles.stripped} href="/work"> 
+              <Kbd className={styles.kbdoverview}> <FontAwesomeIcon icon={faExpand} />  Full overview</Kbd>
             </a>
           </>
         ),
