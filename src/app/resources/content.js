@@ -108,7 +108,7 @@ const about = {
       {
         company: "Broadridge Financial Solutions",
         timeframe: "Feb 2020 - Jun 2023",
-        role: "Associate Software Engineer",
+        role: "Software Engineer",
         achievements: [
           <>
             Developed a proof-of-concept application that secured a contract

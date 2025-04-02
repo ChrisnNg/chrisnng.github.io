@@ -251,7 +251,6 @@ export default function About() {
                   translateY={5}
                   fillWidth
                   horizontal="start"
-                  delay={0.1}
                 >
                   {about.work.title}
                 </RevealFx>
