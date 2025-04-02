@@ -251,7 +251,7 @@ export default function About() {
                   translateY={5}
                   fillWidth
                   horizontal="start"
-                  delay={0.5}
+                  delay={0.1}
                 >
                   {about.work.title}
                 </RevealFx>
@@ -272,7 +272,7 @@ export default function About() {
                           translateY={5}
                           fillWidth
                           horizontal="start"
-                          delay={1}
+                          delay={0.2}
                         > 
                           {experience.company}
                         </RevealFx>
@@ -285,7 +285,7 @@ export default function About() {
                           translateY={5}
                           fillWidth
                           horizontal="start"
-                          delay={0.75}
+                          delay={0.6}
                         > 
                         {experience.timeframe}
                         </RevealFx>
@@ -300,7 +300,7 @@ export default function About() {
                         translateY={5}
                         fillWidth
                         horizontal="start"
-                        delay={1}
+                        delay={0.6}
                       > 
                         {experience.role}
                       </RevealFx>
@@ -318,7 +318,7 @@ export default function About() {
                               translateY={5}
                               fillWidth
                               horizontal="center"
-                              delay={1 + index/3}
+                              delay={0.5 + index/3}
                             > 
                               {achievement}
                             </RevealFx>
@@ -370,7 +370,7 @@ export default function About() {
                   translateY={5}
                   fillWidth
                   horizontal="start"
-                  delay={3.5}
+                  delay={3}
                   > 
                     {about.studies.title}
                   </RevealFx>
