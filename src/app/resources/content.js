@@ -92,10 +92,12 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Hi, My name is Chris I am a product focused software engineer with four
+        Hi, My name is Chris. 
+        <br/>
+        I am a product focused software engineer with four
         years of experience. I'm recognized for my tenacity and ability to solve
-        problems and I love to build secure, reliable, and user friendly web
-        applications that can scale.
+        problems, and I love to build scalable, secure, reliable, and user friendly web
+        applications.
       </>
     ),
   },
@@ -179,7 +181,7 @@ const about = {
   },
   technical: {
     display: true, // set to false to hide this section
-    title: "Technical skills",
+    title: "Technical Skills",
     skills: [
       {
         title: "Languages",
