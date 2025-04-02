@@ -272,7 +272,7 @@ export default function About() {
                           translateY={5}
                           fillWidth
                           horizontal="start"
-                          delay={0.2}
+                          delay={0.1}
                         > 
                           {experience.company}
                         </RevealFx>
@@ -285,7 +285,7 @@ export default function About() {
                           translateY={5}
                           fillWidth
                           horizontal="start"
-                          delay={0.6}
+                          delay={0.2}
                         > 
                         {experience.timeframe}
                         </RevealFx>
@@ -300,7 +300,7 @@ export default function About() {
                         translateY={5}
                         fillWidth
                         horizontal="start"
-                        delay={0.6}
+                        delay={0.3}
                       > 
                         {experience.role}
                       </RevealFx>
@@ -318,7 +318,7 @@ export default function About() {
                               translateY={5}
                               fillWidth
                               horizontal="center"
-                              delay={0.5 + index/3}
+                              delay={0.4 + index/5}
                             > 
                               {achievement}
                             </RevealFx>
@@ -370,7 +370,7 @@ export default function About() {
                   translateY={5}
                   fillWidth
                   horizontal="start"
-                  delay={3}
+                  delay={1.5}
                   > 
                     {about.studies.title}
                   </RevealFx>
@@ -387,7 +387,7 @@ export default function About() {
                           translateY={5}
                           fillWidth
                           horizontal="start"
-                          delay={3.6}
+                          delay={1.6}
                       > 
                         {institution.name}
                       </RevealFx>
@@ -400,7 +400,7 @@ export default function About() {
                         translateY={5}
                         fillWidth
                         horizontal="start"
-                        delay={3.7}
+                        delay={1.7}
                         > 
                           {institution.description}
                         </RevealFx>
@@ -423,7 +423,7 @@ export default function About() {
                 translateY={5}
                 fillWidth
                 horizontal="start"
-                delay={3.8}
+                delay={1.8}
                 > 
                   {about.technical.title}
                 </RevealFx>
@@ -435,7 +435,7 @@ export default function About() {
                         translateY={5}
                         fillWidth
                         horizontal="start"
-                        delay={3.9}
+                        delay={1.9}
                         > 
                         <Text variant="heading-strong-l">{skill.title}</Text>
                       </RevealFx>
@@ -443,7 +443,7 @@ export default function About() {
                         translateY={5}
                         fillWidth
                         horizontal="start"
-                        delay={4}
+                        delay={2}
                         > 
                         <Text variant="body-default-m" onBackground="neutral-weak">
                           {skill.description}
@@ -468,7 +468,7 @@ export default function About() {
                   translateY={5}
                   fillWidth
                   horizontal="start"
-                  delay={4}
+                  delay={2.1}
                 > 
                   {about.projects.title}
                 </RevealFx>
@@ -481,7 +481,7 @@ export default function About() {
                         translateY={5}
                         fillWidth
                         horizontal="center"
-                        delay={4.1}
+                        delay={2.2}
                       >
                     <Text variant="body-default-m" onBackground="neutral-weak">
                         {project.description}
@@ -494,7 +494,7 @@ export default function About() {
                           translateY={5}
                           fillWidth
                           horizontal="start"
-                          delay={4.2}
+                          delay={2.3}
                         > 
                           <Flex
                             key={index}
