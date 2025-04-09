@@ -23,7 +23,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   height,
   alt = "",
   isLoading = false,
-  objectFit = "cover",
+  objectFit = "fill",
   enlarge = false,
   src,
   unoptimized = false,
