@@ -51,6 +51,25 @@
   min-height: 250px;
 }
 
+.projectimgtext {
+  color: white;//#0D483C;
+  transition:color 1s ease;
+}
+.darkoverlay img {
+  filter: brightness(25%);
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.darkoverlay:hover > img {
+  filter: brightness(100%);
+}
+
+.darkoverlay:hover .projectimgtext {
+  color: transparent;
+}
+
+
 .kbdoverview {
   background-image: linear-gradient(to bottom right,black, var(--brand-background-strong)); //#0D483C
   font-weight: var(--font-weight-heading-strong);

@@ -9,7 +9,8 @@ import {
   SmartImage,
   Tag,
   Text,
-  RevealFx
+  RevealFx,
+  TiltFx
 } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
@@ -497,7 +498,7 @@ export default function About() {
                         > 
                           <Flex
                             key={index}
-                            border="neutral-medium"
+                            // border="neutral-medium"
                             radius="l"
                             //@ts-ignore
                             minWidth={image.width}
@@ -505,7 +506,7 @@ export default function About() {
                             height={image.height}
                             className={styles.projectspacing}
                           >
-                              <img
+                              {/* <img
                                 //@ts-ignore
                                 // sizes={image.width.toString()}
                                 //@ts-ignore
@@ -513,7 +514,38 @@ export default function About() {
                                 //@ts-ignore
                                 src={image.src}
                                 className={styles.projectsimg}
-                              />
+                              /> */}
+
+                              <TiltFx
+                                // border="brand-alpha-weak"
+                                // maxWidth={24}
+                                // aspectRatio={0.75}
+                                // radius="l"
+                                className={styles.darkoverlay}
+                              >
+                                <img
+                                  //@ts-ignore
+                                  // sizes={image.width.toString()}
+                                  //@ts-ignore
+                                  alt={image.alt}
+                                  //@ts-ignore
+                                  src={image.src}
+                                  className={styles.projectsimg}
+                                />
+                                <TiltFx
+                                  fillWidth={true}
+                                  position="absolute"
+                                  // bottom="s"
+                                  height={18}
+                                  horizontal="center"
+                                  vertical="center"
+                                  paddingBottom="32"
+                                  textVariant="display-default-xs"
+                                  className={styles.projectimgtext}
+                                >
+                                  {image.alt}
+                                </TiltFx>
+                              </TiltFx>
                           </Flex>
                         </RevealFx>
                         ))}
