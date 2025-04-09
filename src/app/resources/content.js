@@ -66,7 +66,7 @@ const home = {
     <>
       I am a product focused <InlineCode>Software Engineer</InlineCode> with
       four years of experience. I'm recognized for my tenacity and ability to
-      solve problems and I love to build secure, reliable, and user friendly web
+      solve problems, and I love to build secure, reliable, and user friendly web
       applications that can scale.
     </>
   ),
