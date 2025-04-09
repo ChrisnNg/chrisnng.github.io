@@ -491,6 +491,14 @@ export default function About() {
                     {project.images && project.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {project.images.map((image, index) => (
+                          
+                      <TiltFx
+                        // border="brand-alpha-weak"
+                        // maxWidth={24}
+                        // aspectRatio={0.75}
+                        radius="l"
+                        className={styles.darkoverlay}
+                      >
                         <RevealFx
                           translateY={5}
                           fillWidth
@@ -516,14 +524,6 @@ export default function About() {
                                 src={image.src}
                                 className={styles.projectsimg}
                               /> */}
-
-                              <TiltFx
-                                // border="brand-alpha-weak"
-                                // maxWidth={24}
-                                // aspectRatio={0.75}
-                                // radius="l"
-                                className={styles.darkoverlay}
-                              >
                                 <img
                                   //@ts-ignore
                                   // sizes={image.width.toString()}
@@ -546,9 +546,9 @@ export default function About() {
                                 >
                                   {image.alt}
                                 </TiltFx>
-                              </TiltFx>
                           </Flex>
                         </RevealFx>
+                      </TiltFx>
                         ))}
                       </Flex>
                     )}

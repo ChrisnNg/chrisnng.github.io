@@ -60,13 +60,18 @@
   color: white;//#0D483C;
   transition:color 1s ease;
 }
+
+.darkoverlay {
+  width: 100%;
+}
+
 .darkoverlay img {
   filter: brightness(25%);
   -webkit-transition: all 1s ease;
   transition: all 1s ease;
 }
 
-.darkoverlay:hover > img {
+.darkoverlay:hover img {
   filter: brightness(100%);
 }
 
