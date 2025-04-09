@@ -1,8 +1,11 @@
-import { Column, Flex, Heading } from "@/once-ui/components";
-import { Mailchimp } from "@/components";
+import { Column,  Heading, } from "@/once-ui/components";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL } from "@/app/resources";
-import { blog, person, newsletter } from "@/app/resources/content";
+import { blog, person, about } from "@/app/resources/content";
+import {
+  callletter,
+} from "@/app/resources/content";
+import { Callchimp } from "@/components";
 
 export async function generateMetadata() {
   const title = blog.title;
@@ -65,7 +68,7 @@ export default function Blog() {
         <Posts range={[1, 3]} thumbnail />
         <Posts range={[4]} columns="2" />
       </Column>
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
+      {callletter.display && <Callchimp newsletter={callletter} />}
     </Column>
   );
 }
