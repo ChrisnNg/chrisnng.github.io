@@ -318,12 +318,12 @@ const gallery = {
       orientation: "vertical",
     },
     {
-      src: "/images/gallery/img-03.jpg",
+      src: "/images/gallery/img-03.jpeg",
       alt: "image",
       orientation: "vertical",
     },
     {
-      src: "/images/gallery/img-04.jpeg",
+      src: "/images/gallery/img-04.jpg",
       alt: "image",
       orientation: "vertical",
     },
