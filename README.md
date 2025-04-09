@@ -2,6 +2,9 @@ TODO
 
 Meta-data for when sending site as a link
 badges for languages used in project
+fix subscribe button in blog
+add badges under projects for languages
+update project descriptors to better wording
 
 # **Getting started**
 
