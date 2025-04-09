@@ -228,7 +228,8 @@ export default function About() {
               textVariant="body-default-l"
               fillWidth
               gap="m"
-              marginBottom="m"
+              marginBottom="l"
+              className={styles.aboutIntro}
             >
               <RevealFx
                 translateY={5}
