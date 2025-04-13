@@ -116,7 +116,7 @@ const about = {
           </>,
           <>
             Spearheaded streamlining deployment processes to reduce production
-            deployment errors to zero. Saving one hundred combined team hours
+            deployment errors to 0. Saving 100 combined team hours
             per error prevented.
           </>,
           <>

@@ -5,6 +5,7 @@ badges for languages used in project
 fix subscribe button in blog
 add badges under projects for languages
 update project descriptors to better wording
+project section- side scroll buttons?
 
 # **Getting started**
 
