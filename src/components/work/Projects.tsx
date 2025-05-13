@@ -1,5 +1,5 @@
 import { getPosts } from "@/app/utils/utils";
-import { Column } from "@/once-ui/components";
+import { Column, TiltFx } from "@/once-ui/components";
 import { ProjectCard } from "@/components";
 
 interface ProjectsProps {
@@ -23,20 +23,23 @@ export function Projects({ range }: ProjectsProps) {
   return (
     <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
       {displayedProjects.map((post, index) => (
+      <TiltFx radius="l">
         <ProjectCard
-          priority={index < 2}
-          key={post.slug}
-          href={`work/${post.slug}`}
-          images={post.metadata.images}
-          title={post.metadata.title}
-          description={post.metadata.summary}
-          content={post.content}
-          avatars={
-            post.metadata.team?.map((member) => ({ src: member.avatar })) || []
-          }
-          link={post.metadata.link || ""}
+        priority={index < 2}
+        key={post.slug}
+        href={`work/${post.slug}`}
+        images={post.metadata.images}
+        title={post.metadata.title}
+        description={post.metadata.summary}
+        content={post.content}
+        avatars={
+          post.metadata.team?.map((member) => ({ src: member.avatar })) || []
+        }
+        link={post.metadata.link || ""}
         />
+      </TiltFx>
       ))}
+
     </Column>
   );
 }
