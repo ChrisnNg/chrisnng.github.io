@@ -2,7 +2,7 @@ const baseURL = "chrisnng.github.io";
 
 const routes = {
   "/": true,
-  "/about": true,
+  "/about": true, // set to false post 5/27/2025
   "/work": true,
   "/blog": true,
   "/gallery": true,
