@@ -23,7 +23,7 @@ export function Projects({ range }: ProjectsProps) {
   return (
     <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
       {displayedProjects.map((post, index) => (
-      <TiltFx radius="l">
+      <TiltFx key={post.slug} radius="l">
         <ProjectCard
         priority={index < 2}
         key={post.slug}
@@ -36,6 +36,7 @@ export function Projects({ range }: ProjectsProps) {
           post.metadata.team?.map((member) => ({ src: member.avatar })) || []
         }
         link={post.metadata.link || ""}
+        hostedsite={post.metadata.hostedsite || ""}
         />
       </TiltFx>
       ))}

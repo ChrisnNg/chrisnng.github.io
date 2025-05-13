@@ -19,6 +19,7 @@ interface ProjectCardProps {
   description: string;
   avatars: { src: string }[];
   link: string;
+  hostedsite: string;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -29,6 +30,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   avatars,
   link,
+  hostedsite
 }) => {
   return (
     <Column fillWidth gap="m">
@@ -85,6 +87,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   href={link}
                 >
                   <Text variant="body-default-s">View project</Text>
+                </SmartLink>
+              )}
+              {/* typeof hostedsite === 'string' */}
+              {hostedsite  && (
+                <SmartLink
+                  suffixIcon="arrowUpRightFromSquare"
+                  style={{ margin: "0", width: "fit-content" }}
+                  href={hostedsite}
+                >
+                  <Text variant="body-default-s">View site</Text>
                 </SmartLink>
               )}
             </Flex>
