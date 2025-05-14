@@ -85,7 +85,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 </SmartLink>
               )} */}
               {features &&  (
-                  <Text variant="body-default-s">Key Features: {features.map(feature => <p>{feature}</p>)}</Text>
+                  <Text variant="body-default-s">Key Features: {features.map((feature, index) => <p key={index}>{feature}</p>)}</Text>
               )}
 
               {stack && (
