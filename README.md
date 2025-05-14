@@ -7,6 +7,7 @@ add badges under projects for languages
 update project descriptors to better wording
 project section- side scroll buttons?
 add a section for features that uses br after each el in an array
+adjust linebreaks in project key features so that lines begin after icon if continuing
 
 # **Getting started**
 

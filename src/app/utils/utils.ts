@@ -21,6 +21,7 @@ type Metadata = {
   externalLink?: string;
   hostedsite?: string;
   stack?: string;
+  features?: string[];
 };
 
 import { notFound } from "next/navigation";
@@ -52,7 +53,8 @@ function readMDXFile(filePath: string) {
     link: data.link || "",
     externalLink: data.externalLink || "",
     hostedsite: data.hostedsite || "",
-    stack: data.stack || ""
+    stack: data.stack || "",
+    features: data.features || []
   };
 
   return { metadata, content };
