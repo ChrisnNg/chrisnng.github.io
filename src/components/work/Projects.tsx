@@ -37,6 +37,7 @@ export function Projects({ range }: ProjectsProps) {
         }
         link={post.metadata.link || ""}
         hostedsite={post.metadata.hostedsite || ""}
+        stack={post.metadata.stack || ""}
         />
       </TiltFx>
       ))}

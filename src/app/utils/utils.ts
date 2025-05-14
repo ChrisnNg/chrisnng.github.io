@@ -19,7 +19,8 @@ type Metadata = {
   team: Team[];
   link?: string;
   externalLink?: string;
-  hostedsite? :string;
+  hostedsite?: string;
+  stack?: string;
 };
 
 import { notFound } from "next/navigation";
@@ -50,7 +51,8 @@ function readMDXFile(filePath: string) {
     team: data.team || [],
     link: data.link || "",
     externalLink: data.externalLink || "",
-    hostedsite: data.hostedsite || ""
+    hostedsite: data.hostedsite || "",
+    stack: data.stack || ""
   };
 
   return { metadata, content };
