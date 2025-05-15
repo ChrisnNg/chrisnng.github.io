@@ -8,6 +8,16 @@ update project descriptors to better wording
 project section- side scroll buttons?
 add a section for features that uses br after each el in an array
 adjust linebreaks in project key features so that lines begin after icon if continuing
+maybe move right side of text more to the left towards the title. possibly at the first bar?
+
+ABOUT-
+Click on project card and have it take you to the projects page at the level.
+schedule a call, whole button instead of the arrow
+
+GALLERY
+Fix ratio
+darken photo until hovered
+
 
 # **Getting started**
 
