@@ -115,31 +115,22 @@ const about = {
             with a top global industry leader generating millions in revenue.
           </>,
           <>
-            Spearheaded streamlining deployment processes to reduce production
-            deployment errors to 0. Saving 100 combined team hours
-            per error prevented.
+            Spearheaded a zero-error deployment initiative by redesigning CI/CD workflows, eliminating production issues and saving 100+ team hours per incident prevented.
           </>,
           <>
-            Interviewed and trained 8 team members while documenting knowledge
-            to streamline the onboarding procedures.
+            Scaled team efficiency by hiring, training, and documenting onboarding for 8 new members, reducing ramp-up time. 
           </>,
           <>
-            Updated hundreds of thousands of production records with strict
-            criteria to modernize specifically targeted data records. Kept
-            client data consistent with new and incoming data records so systems
-            could be streamlined to accept data types with fewer variety.
+            Migrated and standardized 100K+ production records, ensuring data consistency and enabling streamlined system integration. 
           </>,
           <>
-            Investigated and resolved critical system problems and real-time
-            production issues to maintain client trust and expectations.
+            Resolved critical system issues in real-time, maintaining 100% uptime and client trust in high-stakes environments. 
           </>,
           <>
-            Researched, developed, and tested new products, system enhancements
-            and defects to expand services and capabilities.
+            Researched and developed new products/enhancements, expanding service capabilities and reducing defect rates. 
           </>,
           <>
-            Designed and improved User interfaces and APIs after proactively
-            engaging clients for feedback.
+            Redesigned user interfaces and APIs based on direct client feedback, improving usability and adoption. 
           </>,
         ],
         images: [
@@ -187,8 +178,7 @@ const about = {
         title: "Languages",
         description: (
           <>
-            Javascript, HTML, CSS, Python, Golang, Ruby, C, SQL, SASS,
-            Shellscript, Batch Script, JSX, Markdown
+            Javascript, HTML, CSS, Python, Golang, Ruby, C, SQL, SASS, Shellscript, Batch Script, JSX, Markdown
           </>
         ),
         // optional: leave the array empty if you don't want to display images
@@ -214,11 +204,16 @@ const about = {
         ),
       },
       {
+        title: "Developer Tools",
+        description: (
+          <> Git, VSCode, Agile, Linux, Heroku, CI/CD Pipeline, PostgreSQL</>
+        ),
+      },
+      {
         title: "Testing Suites",
         description: (
           <>
-            Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium, Mocha,
-            PhantomJS
+            Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium, Mocha, PhantomJS
           </>
         ),
       },
