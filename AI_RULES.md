@@ -8,7 +8,7 @@
 - **Icons**: `react-icons` (Heroicons `hi2`, Phosphor `pi`, and FontAwesome 6 `fa6`), managed centrally through `src/once-ui/icons.ts`.
 - **Content Management**: Config-driven architecture via `src/app/resources/config.js` (site metadata, theme styles, route switches) and `src/app/resources/content.js` (copy, bio, navigation, social links).
 - **Long-form Content & CMS**: MDX using `next-mdx-remote`, `@next/mdx`, `gray-matter`, and `remark` for blog posts (`src/app/blog/posts/`) and work projects (`src/app/work/projects/`).
-- **Media & Layout Utilities**: `react-masonry-css` for masonry photo galleries, `@floating-ui/react-dom` for popovers/tooltips, and Next.js Image optimization (`sharp`).
+- **Media & Layout Utilities**: `@floating-ui/react-dom` for popovers/tooltips, and Next.js Image optimization (`sharp`).
 - **Code Syntax Highlighting**: `prismjs` paired with Once UI's `CodeBlock` component (`src/once-ui/modules/code/CodeBlock.tsx`).
 
 ---
@@ -42,5 +42,4 @@
 
 ### 6. Media & Code Blocks
 - **Images**: Use `SmartImage` from `@/once-ui/components` or Next.js `Image` with local paths in `/public/images/`.
-- **Photo Galleries**: Use `react-masonry-css` within `src/components/gallery/MasonryGrid.tsx` for masonry layouts.
 - **Code Snippets**: Use the `CodeBlock` component (`src/once-ui/modules/code/CodeBlock`) powered by `prismjs` for code syntax highlighting.
