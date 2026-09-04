@@ -122,7 +122,9 @@ export default function About() {
             flex={3}
             horizontal="center"
           >
-            <Avatar src={person.avatar} size="xl" />
+            <TiltFx radius="full" fit>
+              <Avatar src={person.avatar} size="xl" />
+            </TiltFx>
             <Flex gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
               {person.location}
@@ -491,64 +493,30 @@ export default function About() {
                     {project.images && project.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {project.images.map((image, index) => (
-                          
-                      <TiltFx
-                        // border="brand-alpha-weak"
-                        // maxWidth={24}
-                        // aspectRatio={0.75}
-                        radius="l"
-                        className={styles.darkoverlay}
-                      >
-                        <RevealFx
-                          translateY={5}
-                          fillWidth
-                          horizontal="start"
-                          delay={2.3}
-                        > 
-                          <Flex
+                          <RevealFx
                             key={index}
-                            // border="neutral-medium"
-                            radius="l"
-                            //@ts-ignore
-                            minWidth={image.width}
-                            //@ts-ignore
-                            height={image.height}
-                            className={styles.projectspacing}
+                            translateY={5}
+                            fillWidth
+                            horizontal="start"
+                            delay={2.3}
                           >
-                              {/* <img
-                                //@ts-ignore
-                                // sizes={image.width.toString()}
+                            <Flex
+                              radius="l"
+                              //@ts-ignore
+                              minWidth={image.width}
+                              //@ts-ignore
+                              height={image.height}
+                              className={styles.projectspacing}
+                            >
+                              <img
                                 //@ts-ignore
                                 alt={image.alt}
                                 //@ts-ignore
                                 src={image.src}
                                 className={styles.projectsimg}
-                              /> */}
-                                <img
-                                  //@ts-ignore
-                                  // sizes={image.width.toString()}
-                                  //@ts-ignore
-                                  alt={image.alt}
-                                  //@ts-ignore
-                                  src={image.src}
-                                  className={styles.projectsimg}
-                                />
-                                <TiltFx
-                                  fillWidth={true}
-                                  position="absolute"
-                                  // bottom="s"
-                                  height={18}
-                                  horizontal="center"
-                                  vertical="center"
-                                  paddingBottom="32"
-                                  textVariant="display-default-xs"
-                                  className={styles.projectimgtext}
-                                >
-                                  {image.alt}
-                                </TiltFx>
-                          </Flex>
-                        </RevealFx>
-                      </TiltFx>
+                              />
+                            </Flex>
+                          </RevealFx>
                         ))}
                       </Flex>
                     )}

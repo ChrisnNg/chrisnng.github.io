@@ -49,36 +49,13 @@
   height: 100%;
   width: 100%;
   border-radius: 15px;
+  object-fit: cover;
 }
 
 .projectspacing {
   width: 100%;
   min-height: 250px;
 }
-
-.projectimgtext {
-  color: white;//#0D483C;
-  transition:color 1s ease;
-}
-
-.darkoverlay {
-  width: 100%;
-}
-
-.darkoverlay img {
-  filter: brightness(25%);
-  -webkit-transition: all 1s ease;
-  transition: all 1s ease;
-}
-
-.darkoverlay:hover img {
-  filter: brightness(100%);
-}
-
-.darkoverlay:hover .projectimgtext {
-  color: transparent;
-}
-
 
 .kbdoverview {
   background-image: linear-gradient(to bottom right,black, var(--brand-background-strong)); //#0D483C
