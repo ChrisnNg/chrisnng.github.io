@@ -147,17 +147,17 @@ const about = {
   },
   studies: {
     display: true, // set to false to hide this section
-    title: "Studies",
+    title: "Education",
     institutions: [
       {
         name: "University of British Columbia",
-        description: <>Psychology Year 1-2</>,
+        description: <>Psychology</>,
       },
       {
         name: "Lighthouse Labs",
         description: (
           <>
-            Full Stack Web Development Bootcamp (Ruby on Rails, React.js, Node.js)
+            Full Stack Web Development (Ruby on Rails, React.js, Node.js)
           </>
         ),
       },
