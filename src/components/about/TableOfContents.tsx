@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { Column } from "@/once-ui/components";
 import styles from "./about.module.scss";
 
@@ -22,16 +22,32 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   structure,
   about,
 }) => {
-  const visibleSections = structure.filter((section) => section.display);
+  const visibleSections = useMemo(
+    () => structure.filter((section) => section.display),
+    [structure]
+  );
+  const visibleSectionsRef = useRef(visibleSections);
+  visibleSectionsRef.current = visibleSections;
+
   const [activeSection, setActiveSection] = useState<string>(
     visibleSections[0]?.title || ""
   );
   const isClickScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const cancelClickScroll = useCallback(() => {
+    isClickScrollingRef.current = false;
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = null;
+    }
+  }, []);
+
   const updateActiveSection = useCallback(() => {
     if (isClickScrollingRef.current) return;
-    if (visibleSections.length === 0) return;
+
+    const sections = visibleSectionsRef.current;
+    if (sections.length === 0) return;
 
     const scrollY = window.scrollY;
     const innerHeight = window.innerHeight;
@@ -39,7 +55,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 
     // Check if reached bottom of page
     if (scrollY + innerHeight >= scrollHeight - 60) {
-      const lastSection = visibleSections[visibleSections.length - 1];
+      const lastSection = sections[sections.length - 1];
       if (lastSection) {
         setActiveSection(lastSection.title);
       }
@@ -47,16 +63,16 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     }
 
     // Check if near the top
-    if (scrollY < 120) {
-      setActiveSection(visibleSections[0].title);
+    if (scrollY < 100) {
+      setActiveSection(sections[0].title);
       return;
     }
 
     // Dynamic threshold based on viewport height (comfortably in upper third of screen)
-    const threshold = Math.max(160, Math.min(280, innerHeight * 0.3));
-    let current = visibleSections[0].title;
+    const threshold = Math.max(140, Math.min(260, innerHeight * 0.3));
+    let current = sections[0].title;
 
-    for (const section of visibleSections) {
+    for (const section of sections) {
       const element = document.getElementById(section.title);
       if (element) {
         const rect = element.getBoundingClientRect();
@@ -69,7 +85,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     }
 
     setActiveSection(current);
-  }, [visibleSections]);
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -84,17 +100,31 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       }
     };
 
+    // If user initiates manual scroll or touch, immediately resume scroll tracking
+    const handleUserInteraction = () => {
+      cancelClickScroll();
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Run on initial load
+    window.addEventListener("wheel", handleUserInteraction, { passive: true });
+    window.addEventListener("touchmove", handleUserInteraction, { passive: true });
+    window.addEventListener("pointerdown", handleUserInteraction, { passive: true });
+    window.addEventListener("scrollend", handleUserInteraction, { passive: true });
+
+    // Initial check on mount
     updateActiveSection();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleUserInteraction);
+      window.removeEventListener("touchmove", handleUserInteraction);
+      window.removeEventListener("pointerdown", handleUserInteraction);
+      window.removeEventListener("scrollend", handleUserInteraction);
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
     };
-  }, [updateActiveSection]);
+  }, [updateActiveSection, cancelClickScroll]);
 
   const scrollTo = (id: string, offset: number = 80) => {
     const element = document.getElementById(id);
@@ -113,11 +143,11 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
-      // Re-enable scroll spy tracking after smooth scroll completes
+      // Re-enable scroll spy tracking after smooth scroll finishes
       scrollTimeoutRef.current = setTimeout(() => {
         isClickScrollingRef.current = false;
         updateActiveSection();
-      }, 700);
+      }, 600);
     }
   };
 
