@@ -5,7 +5,6 @@ const routes = {
   "/about": true, // set to false post 5/27/2025
   "/work": true,
   "/blog": true,
-  "/gallery": true,
 };
 
 // Enable password protection on selected routes
