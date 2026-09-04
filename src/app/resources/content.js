@@ -145,7 +145,7 @@ const about = {
       },
     ],
   },
-  studies: {
+  education: {
     display: true, // set to false to hide this section
     title: "Education",
     institutions: [
