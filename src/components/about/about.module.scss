@@ -49,6 +49,7 @@
   height: 100%;
   width: 100%;
   border-radius: 15px;
+  object-fit: cover;
 }
 
 .projectspacing {
@@ -57,12 +58,13 @@
 }
 
 .projectimgtext {
-  color: white;//#0D483C;
-  transition:color 1s ease;
+  color: white;
+  transition: color 1s ease;
 }
 
 .darkoverlay {
   width: 100%;
+  cursor: pointer;
 }
 
 .darkoverlay img {
@@ -78,7 +80,6 @@
 .darkoverlay:hover .projectimgtext {
   color: transparent;
 }
-
 
 .kbdoverview {
   background-image: linear-gradient(to bottom right,black, var(--brand-background-strong)); //#0D483C

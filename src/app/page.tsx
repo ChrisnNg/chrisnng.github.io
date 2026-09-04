@@ -14,6 +14,7 @@ import {
 } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
+import { StickyScheduleCall } from "@/components";
 import styles from "@/components/about/about.module.scss";
 import { person, about, social } from "@/app/resources/content";
 import React from "react";
@@ -122,7 +123,9 @@ export default function About() {
             flex={3}
             horizontal="center"
           >
-            <Avatar src={person.avatar} size="xl" />
+            <TiltFx radius="full" fit>
+              <Avatar src={person.avatar} size="xl" />
+            </TiltFx>
             <Flex gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
               {person.location}
@@ -136,6 +139,9 @@ export default function About() {
                 ))}
               </Flex>
             )}
+            {about.calendar.display && (
+              <StickyScheduleCall link={about.calendar.link} />
+            )}
           </Column>
         )}
         <Column className={styles.blockAlign} flex={9} maxWidth={40}>
@@ -148,6 +154,7 @@ export default function About() {
           >
             {about.calendar.display && (
               <Flex
+                id="top-schedule-call"
                 fitWidth
                 border="brand-alpha-medium"
                 className={styles.blockAlign}
@@ -198,10 +205,9 @@ export default function About() {
                 {social.map(
                   (item) =>
                     item.link && (
-                      <>
+                      <React.Fragment key={item.name}>
                         <Button
                           className="s-flex-hide"
-                          key={item.name}
                           href={item.link}
                           prefixIcon={item.icon}
                           label={item.name}
@@ -211,12 +217,11 @@ export default function About() {
                         <IconButton
                           className="s-flex-show"
                           size="l"
-                          key={`${item.name}-icon`}
                           href={item.link}
                           icon={item.icon}
                           variant="secondary"
                         />
-                      </>
+                      </React.Fragment>
                     )
                 )}
               </Flex>
@@ -491,52 +496,35 @@ export default function About() {
                     {project.images && project.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {project.images.map((image, index) => (
-                          
-                      <TiltFx
-                        // border="brand-alpha-weak"
-                        // maxWidth={24}
-                        // aspectRatio={0.75}
-                        radius="l"
-                        className={styles.darkoverlay}
-                      >
-                        <RevealFx
-                          translateY={5}
-                          fillWidth
-                          horizontal="start"
-                          delay={2.3}
-                        > 
                           <Flex
                             key={index}
-                            // border="neutral-medium"
                             radius="l"
-                            //@ts-ignore
-                            minWidth={image.width}
-                            //@ts-ignore
-                            height={image.height}
-                            className={styles.projectspacing}
+                            className={styles.darkoverlay}
                           >
-                              {/* <img
+                            <RevealFx
+                              translateY={5}
+                              fillWidth
+                              horizontal="start"
+                              delay={2.3}
+                            >
+                              <Flex
+                                radius="l"
                                 //@ts-ignore
-                                // sizes={image.width.toString()}
+                                minWidth={image.width}
                                 //@ts-ignore
-                                alt={image.alt}
-                                //@ts-ignore
-                                src={image.src}
-                                className={styles.projectsimg}
-                              /> */}
+                                height={image.height}
+                                className={styles.projectspacing}
+                              >
                                 <img
-                                  //@ts-ignore
-                                  // sizes={image.width.toString()}
                                   //@ts-ignore
                                   alt={image.alt}
                                   //@ts-ignore
                                   src={image.src}
                                   className={styles.projectsimg}
                                 />
-                                <TiltFx
+                                <Flex
                                   fillWidth={true}
                                   position="absolute"
-                                  // bottom="s"
                                   height={18}
                                   horizontal="center"
                                   vertical="center"
@@ -545,10 +533,10 @@ export default function About() {
                                   className={styles.projectimgtext}
                                 >
                                   {image.alt}
-                                </TiltFx>
+                                </Flex>
+                              </Flex>
+                            </RevealFx>
                           </Flex>
-                        </RevealFx>
-                      </TiltFx>
                         ))}
                       </Flex>
                     )}

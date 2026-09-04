@@ -14,10 +14,6 @@ ABOUT-
 Click on project card and have it take you to the projects page at the level.
 schedule a call, whole button instead of the arrow
 
-GALLERY
-Fix ratio
-darken photo until hovered
-
 
 # **Getting started**
 
