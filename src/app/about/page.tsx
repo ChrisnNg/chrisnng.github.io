@@ -14,6 +14,7 @@ import {
 } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
+import { StickyScheduleCall } from "@/components";
 import styles from "@/components/about/about.module.scss";
 import { person, about, social } from "@/app/resources/content";
 import React from "react";
@@ -138,6 +139,9 @@ export default function About() {
                 ))}
               </Flex>
             )}
+            {about.calendar.display && (
+              <StickyScheduleCall link={about.calendar.link} />
+            )}
           </Column>
         )}
         <Column className={styles.blockAlign} flex={9} maxWidth={40}>
@@ -150,6 +154,7 @@ export default function About() {
           >
             {about.calendar.display && (
               <Flex
+                id="top-schedule-call"
                 fitWidth
                 border="brand-alpha-medium"
                 className={styles.blockAlign}
