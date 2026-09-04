@@ -34,7 +34,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   link,
   hostedsite,
   stack,
-  features
+  features,
 }) => {
   return (
     <Column fillWidth gap="m">
@@ -45,75 +45,82 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           alt: title,
         }))}
       />
-      <Flex
-        mobileDirection="column"
+      <Column
         fillWidth
         paddingX="s"
         paddingTop="12"
         paddingBottom="24"
-        gap="l"
+        gap="16"
       >
         {title && (
-          <Flex flex={5}>
-            <Heading as="h2" wrap="balance" variant="heading-strong-xl">
-              {title}
-            </Heading>
-          </Flex>
+          <Heading as="h2" wrap="balance" variant="heading-strong-xl">
+            {title}
+          </Heading>
         )}
-        {(avatars?.length > 0 || description?.trim() || content?.trim()) && (
-          <Column flex={7} gap="16">
-            {avatars?.length > 0 && (
-              <AvatarGroup avatars={avatars} size="m" reverse />
-            )}
-            {description?.trim() && (
-              <Text
-                wrap="balance"
-                variant="body-default-s"
-                onBackground="neutral-weak"
-              >
-                {description}
-              </Text>
-            )}
-            <Flex gap="24" wrap>
-              {/* {content?.trim() && (
-                <SmartLink
-                  suffixIcon="arrowRight"
-                  style={{ margin: "0", width: "fit-content" }}
-                  href={href}
-                >
-                  <Text variant="body-default-s">Read case study</Text>
-                </SmartLink>
-              )} */}
-              {features &&  (
-                  <Text variant="body-default-s">Key Features: {features.map((feature, index) => <p key={index}>{feature}</p>)}</Text>
-              )}
 
-              {stack && (
-                  <Text variant="body-default-s">Tech Stack: {stack}</Text>
-              )}
-              {link && (
-                <SmartLink
-                  suffixIcon="arrowUpRightFromSquare"
-                  style={{ margin: "0", width: "fit-content" }}
-                  href={link}
+        {avatars?.length > 0 && (
+          <AvatarGroup avatars={avatars} size="m" reverse />
+        )}
+
+        {description?.trim() && (
+          <Text
+            wrap="balance"
+            variant="body-default-m"
+            onBackground="neutral-weak"
+          >
+            {description}
+          </Text>
+        )}
+
+        {features && features.length > 0 && (
+          <Column gap="8">
+            <Text variant="label-strong-m">Key Features:</Text>
+            <Column gap="4">
+              {features.map((feature, index) => (
+                <Text
+                  key={index}
+                  variant="body-default-s"
+                  onBackground="neutral-weak"
                 >
-                  <Text variant="body-default-s">View project</Text>
-                </SmartLink>
-              )}
-              {/* typeof hostedsite === 'string' */}
-              {hostedsite  && (
-                <SmartLink
-                  suffixIcon="arrowUpRightFromSquare"
-                  style={{ margin: "0", width: "fit-content" }}
-                  href={hostedsite}
-                >
-                  <Text variant="body-default-s">View site</Text>
-                </SmartLink>
-              )}
-            </Flex>
+                  {feature}
+                </Text>
+              ))}
+            </Column>
           </Column>
         )}
-      </Flex>
+
+        {stack && (
+          <Flex gap="8" wrap vertical="center">
+            <Text variant="label-strong-m">Tech Stack:</Text>
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {stack}
+            </Text>
+          </Flex>
+        )}
+
+        {(link || hostedsite) && (
+          <Flex gap="16" wrap paddingTop="4">
+            {link && (
+              <SmartLink
+                suffixIcon="arrowUpRightFromSquare"
+                style={{ margin: "0", width: "fit-content" }}
+                href={link}
+              >
+                <Text variant="body-default-s">View project</Text>
+              </SmartLink>
+            )}
+            {hostedsite && (
+              <SmartLink
+                suffixIcon="arrowUpRightFromSquare"
+                style={{ margin: "0", width: "fit-content" }}
+                href={hostedsite}
+              >
+                <Text variant="body-default-s">View site</Text>
+              </SmartLink>
+            )}
+          </Flex>
+        )}
+      </Column>
     </Column>
   );
 };
