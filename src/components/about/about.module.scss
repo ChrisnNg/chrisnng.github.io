@@ -104,6 +104,191 @@
   -ms-animation: fadeIn 3s;
 }
 
+/* Table of Contents Navigation */
+.tocNav {
+  user-select: none;
+}
+
+.tocSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--static-space-8, 8px);
+}
+
+.tocItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--static-space-8, 8px);
+  cursor: pointer;
+  position: relative;
+  padding: 4px 0;
+  transition: transform var(--transition-micro-medium, 0.2s ease);
+  text-decoration: none;
+  outline: none;
+
+  &:hover {
+    transform: translateX(var(--static-space-4, 4px));
+
+    .tocText {
+      color: var(--neutral-on-background-strong, #ffffff);
+    }
+
+    .tocDash {
+      background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.5));
+    }
+  }
+
+  &:focus-visible {
+    transform: translateX(var(--static-space-4, 4px));
+
+    .tocText {
+      color: var(--neutral-on-background-strong, #ffffff);
+    }
+  }
+}
+
+.tocDash {
+  height: 2px;
+  width: 16px;
+  min-width: 16px;
+  background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.25));
+  border-radius: 2px;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tocLabelWrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.tocText {
+  color: var(--neutral-on-background-weak, rgba(255, 255, 255, 0.5));
+  font-size: var(--font-size-body-m, 14px);
+  font-family: var(--font-family-body, inherit);
+  line-height: var(--line-height-body-m, 20px);
+  font-weight: var(--font-weight-body-default, 400);
+  transition: color 0.35s ease, font-weight 0.2s ease;
+  white-space: nowrap;
+}
+
+.tocUnderline {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--brand-solid-strong, #10b981);
+  box-shadow: 0 0 10px var(--brand-alpha-strong, rgba(16, 185, 129, 0.45));
+  border-radius: 2px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* Active State */
+.tocItemActive {
+  .tocDash {
+    width: 28px;
+    background: var(--brand-solid-strong, #10b981);
+  }
+
+  .tocText {
+    color: var(--neutral-on-background-strong, #ffffff);
+    font-weight: var(--font-weight-heading-strong, 600);
+  }
+
+  .tocUnderline {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Sub-items */
+.tocSubItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--static-space-12, 12px);
+  padding-left: var(--static-space-24, 24px);
+  cursor: pointer;
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  transition: transform var(--transition-micro-medium, 0.2s ease);
+  outline: none;
+
+  &:hover {
+    transform: translateX(var(--static-space-4, 4px));
+
+    .tocSubText {
+      color: var(--neutral-on-background-strong, #ffffff);
+    }
+  }
+
+  &:focus-visible {
+    transform: translateX(var(--static-space-4, 4px));
+
+    .tocSubText {
+      color: var(--neutral-on-background-strong, #ffffff);
+    }
+  }
+}
+
+.tocSubDash {
+  height: 1.5px;
+  width: 8px;
+  min-width: 8px;
+  background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.2));
+  border-radius: 1px;
+  transition: width 0.35s ease, background 0.35s ease;
+}
+
+.tocSubText {
+  color: var(--neutral-on-background-weak, rgba(255, 255, 255, 0.45));
+  font-size: var(--font-size-body-s, 12px);
+  font-family: var(--font-family-body, inherit);
+  transition: color 0.35s ease;
+  white-space: nowrap;
+}
+
+.tocSubUnderline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--brand-solid-strong, #10b981);
+  box-shadow: 0 0 8px var(--brand-alpha-strong, rgba(16, 185, 129, 0.4));
+  border-radius: 1px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.tocSubItemActive {
+  .tocSubDash {
+    width: 16px;
+    background: var(--brand-solid-strong, #10b981);
+  }
+
+  .tocSubText {
+    color: var(--neutral-on-background-strong, #ffffff);
+    font-weight: var(--font-weight-heading-strong, 600);
+  }
+
+  .tocSubUnderline {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; }
   50% { opacity: 0; }
