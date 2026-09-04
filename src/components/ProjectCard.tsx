@@ -37,7 +37,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   features,
 }) => {
   return (
-    <Column fillWidth gap="m">
+    <Column fillWidth gap="m" horizontal="center">
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
         images={images.map((image) => ({
@@ -47,13 +47,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       />
       <Column
         fillWidth
+        horizontal="center"
         paddingX="s"
         paddingTop="12"
         paddingBottom="24"
         gap="16"
       >
         {title && (
-          <Heading as="h2" wrap="balance" variant="heading-strong-xl">
+          <Heading as="h2" wrap="balance" variant="heading-strong-xl" align="center">
             {title}
           </Heading>
         )}
@@ -67,20 +68,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             wrap="balance"
             variant="body-default-m"
             onBackground="neutral-weak"
+            align="center"
           >
             {description}
           </Text>
         )}
 
         {features && features.length > 0 && (
-          <Column gap="8">
-            <Text variant="label-strong-m">Key Features:</Text>
-            <Column gap="4">
+          <Column gap="8" horizontal="center" fillWidth>
+            <Text variant="label-strong-m" align="center">Key Features:</Text>
+            <Column gap="4" horizontal="center" fillWidth>
               {features.map((feature, index) => (
                 <Text
                   key={index}
                   variant="body-default-s"
                   onBackground="neutral-weak"
+                  align="center"
                 >
                   {feature}
                 </Text>
@@ -90,16 +93,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
 
         {stack && (
-          <Flex gap="8" wrap vertical="center">
-            <Text variant="label-strong-m">Tech Stack:</Text>
-            <Text variant="body-default-s" onBackground="neutral-weak">
+          <Flex gap="8" wrap vertical="center" horizontal="center">
+            <Text variant="label-strong-m" align="center">Tech Stack:</Text>
+            <Text variant="body-default-s" onBackground="neutral-weak" align="center">
               {stack}
             </Text>
           </Flex>
         )}
 
         {(link || hostedsite) && (
-          <Flex gap="16" wrap paddingTop="4">
+          <Flex gap="16" wrap paddingTop="4" horizontal="center">
             {link && (
               <SmartLink
                 suffixIcon="arrowUpRightFromSquare"
