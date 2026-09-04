@@ -493,30 +493,47 @@ export default function About() {
                     {project.images && project.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {project.images.map((image, index) => (
-                          <RevealFx
+                          <Flex
                             key={index}
-                            translateY={5}
-                            fillWidth
-                            horizontal="start"
-                            delay={2.3}
+                            radius="l"
+                            className={styles.darkoverlay}
                           >
-                            <Flex
-                              radius="l"
-                              //@ts-ignore
-                              minWidth={image.width}
-                              //@ts-ignore
-                              height={image.height}
-                              className={styles.projectspacing}
+                            <RevealFx
+                              translateY={5}
+                              fillWidth
+                              horizontal="start"
+                              delay={2.3}
                             >
-                              <img
+                              <Flex
+                                radius="l"
                                 //@ts-ignore
-                                alt={image.alt}
+                                minWidth={image.width}
                                 //@ts-ignore
-                                src={image.src}
-                                className={styles.projectsimg}
-                              />
-                            </Flex>
-                          </RevealFx>
+                                height={image.height}
+                                className={styles.projectspacing}
+                              >
+                                <img
+                                  //@ts-ignore
+                                  alt={image.alt}
+                                  //@ts-ignore
+                                  src={image.src}
+                                  className={styles.projectsimg}
+                                />
+                                <Flex
+                                  fillWidth={true}
+                                  position="absolute"
+                                  height={18}
+                                  horizontal="center"
+                                  vertical="center"
+                                  paddingBottom="32"
+                                  textVariant="display-default-xs"
+                                  className={styles.projectimgtext}
+                                >
+                                  {image.alt}
+                                </Flex>
+                              </Flex>
+                            </RevealFx>
+                          </Flex>
                         ))}
                       </Flex>
                     )}
