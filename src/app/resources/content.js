@@ -151,14 +151,13 @@ const about = {
     institutions: [
       {
         name: "University of British Columbia",
-        description: <>Psychology</>,
+        description: <>Psychology Year 1-2</>,
       },
       {
         name: "Lighthouse Labs",
         description: (
           <>
-            An intensive 12-week full-course bootcamp to develop full-stack
-            skills
+            Full Stack Web Development Bootcamp (Ruby on Rails, React.js, Node.js)
           </>
         ),
       },
@@ -178,7 +177,7 @@ const about = {
         title: "Languages",
         description: (
           <>
-            Javascript, HTML, CSS, Python, Golang, Ruby, C, SQL, SASS, Shellscript, Batch Script, JSX, Markdown
+            Javascript, HTML, CSS, Python, Golang, Ruby, C, SQL, SASS, Shellscript, Batch Script, JSX, Markdown, Pinescript
           </>
         ),
         // optional: leave the array empty if you don't want to display images
