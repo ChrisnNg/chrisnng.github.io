@@ -232,12 +232,12 @@ const about = {
         title: "",
         description: (
           <>
-            <a className={styles.stripped} href="/work">
+            <Link className={styles.stripped} href="/work">
               <Kbd className={styles.kbdoverview}>
                 {" "}
                 <FontAwesomeIcon icon={faExpand} /> Full overview
               </Kbd>
-            </a>
+            </Link>
           </>
         ),
         images: [

@@ -13,6 +13,9 @@ if (env === "development") {
   /** @type {import('next').NextConfig} */
   nextConfig = {
     pageExtensions: ["ts", "tsx", "md", "mdx"],
+    images: {
+      unoptimized: true,
+    },
     reactStrictMode: true,
   };
 } else {
@@ -22,6 +25,9 @@ if (env === "development") {
   nextConfig = {
     pageExtensions: ["ts", "tsx", "md", "mdx"],
     output: "export", // <=== enables static exports (required for github pages)
+    images: {
+      unoptimized: true,
+    },
     reactStrictMode: true,
   };
 }
