@@ -29,51 +29,51 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       decorative = true,
       tooltip,
       tooltipPosition = "top",
-      ...rest
-    },
-    ref,
-  ) => {
-    const IconComponent: IconType | undefined = iconLibrary[name];
-
-    if (!IconComponent) {
-      console.warn(`Icon "${name}" does not exist in the library.`);
-      return null;
-    }
-
-    if (onBackground && onSolid) {
-      console.warn(
-        "You cannot use both 'onBackground' and 'onSolid' props simultaneously. Only one will be applied.",
-      );
-    }
-
-    let colorClass = "color-inherit";
-
-    if (onBackground) {
-      const [scheme, weight] = onBackground.split("-") as [
-        ColorScheme,
-        ColorWeight,
-      ];
-      colorClass = `${scheme}-on-background-${weight}`;
-    } else if (onSolid) {
-      const [scheme, weight] = onSolid.split("-") as [ColorScheme, ColorWeight];
-      colorClass = `${scheme}-on-solid-${weight}`;
-    }
-
-    const [isTooltipVisible, setTooltipVisible] = useState(false);
-    const [isHover, setIsHover] = useState(false);
-
-    useEffect(() => {
-      let timer: NodeJS.Timeout;
-      if (isHover) {
-        timer = setTimeout(() => {
-          setTooltipVisible(true);
-        }, 400);
-      } else {
-        setTooltipVisible(false);
+        ...rest
+      },
+      ref,
+    ) => {
+      const [isTooltipVisible, setTooltipVisible] = useState(false);
+      const [isHover, setIsHover] = useState(false);
+  
+      useEffect(() => {
+        let timer: NodeJS.Timeout;
+        if (isHover) {
+          timer = setTimeout(() => {
+            setTooltipVisible(true);
+          }, 400);
+        } else {
+          setTooltipVisible(false);
+        }
+  
+        return () => clearTimeout(timer);
+      }, [isHover]);
+  
+      const IconComponent: IconType | undefined = iconLibrary[name];
+  
+      if (!IconComponent) {
+        console.warn(`Icon "${name}" does not exist in the library.`);
+        return null;
       }
-
-      return () => clearTimeout(timer);
-    }, [isHover]);
+  
+      if (onBackground && onSolid) {
+        console.warn(
+          "You cannot use both 'onBackground' and 'onSolid' props simultaneously. Only one will be applied.",
+        );
+      }
+  
+      let colorClass = "color-inherit";
+  
+      if (onBackground) {
+        const [scheme, weight] = onBackground.split("-") as [
+          ColorScheme,
+          ColorWeight,
+        ];
+        colorClass = `${scheme}-on-background-${weight}`;
+      } else if (onSolid) {
+        const [scheme, weight] = onSolid.split("-") as [ColorScheme, ColorWeight];
+        colorClass = `${scheme}-on-solid-${weight}`;
+      }
 
     return (
       <Flex
