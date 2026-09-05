@@ -157,17 +157,12 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     <Column
       as="nav"
       aria-label="Table of contents"
-      left="0"
+      fitWidth
+      paddingTop="16"
+      gap="14"
       style={{
-        top: "50%",
-        transform: "translateY(-50%)",
         whiteSpace: "nowrap",
-        zIndex: 10,
       }}
-      position="fixed"
-      paddingLeft="24"
-      gap="24"
-      hide="s"
       className={styles.tocNav}
     >
       {visibleSections.map((section, sectionIndex) => {

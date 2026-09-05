@@ -100,9 +100,6 @@ export default function About() {
           }),
         }}
       />
-      {about.tableOfContent.display && (
-        <TableOfContents structure={structure} about={about} />
-      )}
       <Flex fillWidth mobileDirection="column" horizontal="center">
         {about.avatar.display && (
           <Column
@@ -132,6 +129,9 @@ export default function About() {
             )}
             {about.calendar.display && (
               <StickyScheduleCall link={about.calendar.link} />
+            )}
+            {about.tableOfContent.display && (
+              <TableOfContents structure={structure} about={about} />
             )}
           </Column>
         )}

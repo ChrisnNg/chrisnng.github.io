@@ -110,6 +110,8 @@
 /* Table of Contents Navigation */
 .tocNav {
   user-select: none;
+  width: fit-content;
+  align-self: center;
 }
 
 .tocSection {
