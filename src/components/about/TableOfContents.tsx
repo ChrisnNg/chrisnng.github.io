@@ -157,17 +157,12 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     <Column
       as="nav"
       aria-label="Table of contents"
-      left="0"
+      fitWidth
+      paddingTop="16"
+      gap="16"
       style={{
-        top: "50%",
-        transform: "translateY(-50%)",
         whiteSpace: "nowrap",
-        zIndex: 10,
       }}
-      position="fixed"
-      paddingLeft="24"
-      gap="24"
-      hide="s"
       className={styles.tocNav}
     >
       {visibleSections.map((section, sectionIndex) => {
@@ -188,7 +183,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                 }
               }}
             >
-              <span className={styles.tocDash} />
+              <span className={styles.tocDot} />
               <span className={styles.tocLabelWrapper}>
                 <span className={styles.tocText}>{section.title}</span>
                 <span className={styles.tocUnderline} />
@@ -215,7 +210,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                         }
                       }}
                     >
-                      <span className={styles.tocSubDash} />
+                      <span className={styles.tocSubDot} />
                       <span className={styles.tocLabelWrapper}>
                         <span className={styles.tocSubText}>{item}</span>
                         <span className={styles.tocSubUnderline} />

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InlineCode, Kbd } from "@/once-ui/components";
 import styles from "@/components/about/about.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,7 +18,7 @@ const person = {
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
+  title: <>Subscribe to {person.firstName}&apos;s Newsletter</>,
   description: (
     <>
       I occasionally write about design, technology, and share thoughts on the
@@ -65,7 +66,7 @@ const home = {
   subline: (
     <>
       I am a product focused <InlineCode>Software Engineer</InlineCode> with
-      four years of experience. I'm recognized for my tenacity and ability to
+      four years of experience. I&apos;m recognized for my tenacity and ability to
       solve problems, and I love to build secure, reliable, and user friendly
       web applications that can scale.
     </>
@@ -94,7 +95,7 @@ const about = {
       <>
         Hi, My name is Chris.
         <br />I am a product focused software engineer with four years of
-        experience. I'm recognized for my tenacity and ability to solve
+        experience. I&apos;m recognized for my tenacity and ability to solve
         problems, and I love to build scalable, secure, reliable, and user
         friendly web applications.
       </>
@@ -157,7 +158,7 @@ const about = {
     institutions: [
       {
         name: "University of British Columbia",
-        description: <>Psychology Year</>,
+        description: <>Psychology</>,
       },
       {
         name: "Lighthouse Labs",
@@ -168,7 +169,7 @@ const about = {
       {
         name: "Harvard University",
         description: (
-          <>CS50 Harvard's Introduction to Computer Science and Programming</>
+          <>CS50 Harvard&apos;s Introduction to Computer Science and Programming</>
         ),
       },
     ],

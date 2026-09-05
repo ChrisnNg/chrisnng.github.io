@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { Flex, RevealFx } from "@/once-ui/components";
 import styles from "./about.module.scss";
 
@@ -38,17 +39,21 @@ export const ProjectImageCard: React.FC<ProjectImageProps> = ({
       <RevealFx translateY={5} fillWidth horizontal="start" delay={delay}>
         <Flex
           radius="l"
+          position="relative"
+          overflow="hidden"
           //@ts-ignore
           minWidth={image.width}
           //@ts-ignore
           height={image.height}
           className={styles.projectspacing}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             alt={image.alt || "Project preview"}
             src={image.src}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             className={styles.projectsimg}
+            style={{ objectFit: "cover" }}
           />
           <Flex
             fillWidth

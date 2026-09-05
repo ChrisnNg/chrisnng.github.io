@@ -30,8 +30,8 @@ const Carousel: React.FC<CarouselProps> = ({
   ...rest
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const [initialTransition, setInitialTransition] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(revealedByDefault);
+  const [initialTransition, setInitialTransition] = useState(revealedByDefault);
   const [isHovered, setIsHovered] = useState(false);
   const [isDocumentHidden, setIsDocumentHidden] = useState(false);
 
