@@ -66,8 +66,8 @@ const home = {
     <>
       I am a product focused <InlineCode>Software Engineer</InlineCode> with
       four years of experience. I'm recognized for my tenacity and ability to
-      solve problems, and I love to build secure, reliable, and user friendly web
-      applications that can scale.
+      solve problems, and I love to build secure, reliable, and user friendly
+      web applications that can scale.
     </>
   ),
 };
@@ -92,12 +92,11 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Hi, My name is Chris. 
-        <br/>
-        I am a product focused software engineer with four
-        years of experience. I'm recognized for my tenacity and ability to solve
-        problems, and I love to build scalable, secure, reliable, and user friendly web
-        applications.
+        Hi, My name is Chris.
+        <br />I am a product focused software engineer with four years of
+        experience. I'm recognized for my tenacity and ability to solve
+        problems, and I love to build scalable, secure, reliable, and user
+        friendly web applications.
       </>
     ),
   },
@@ -115,22 +114,29 @@ const about = {
             with a top global industry leader generating millions in revenue.
           </>,
           <>
-            Spearheaded a zero-error deployment initiative by redesigning CI/CD workflows, eliminating production issues and saving 100+ team hours per incident prevented.
+            Spearheaded a zero-error deployment initiative by redesigning CI/CD
+            workflows, eliminating production issues and saving 100+ team hours
+            per incident prevented.
           </>,
           <>
-            Scaled team efficiency by hiring, training, and documenting onboarding for 8 new members, reducing ramp-up time. 
+            Scaled team efficiency by hiring, training, and documenting
+            onboarding for 8 new members, reducing ramp-up time.
           </>,
           <>
-            Migrated and standardized 100K+ production records, ensuring data consistency and enabling streamlined system integration. 
+            Migrated and standardized 100K+ production records, ensuring data
+            consistency and enabling streamlined system integration.
           </>,
           <>
-            Resolved critical system issues in real-time, maintaining 100% uptime and client trust in high-stakes environments. 
+            Resolved critical system issues in real-time, maintaining 100%
+            uptime and client trust in high-stakes environments.
           </>,
           <>
-            Researched and developed new products/enhancements, expanding service capabilities and reducing defect rates. 
+            Researched and developed new products/enhancements, expanding
+            service capabilities and reducing defect rates.
           </>,
           <>
-            Redesigned user interfaces and APIs based on direct client feedback, improving usability and adoption. 
+            Redesigned user interfaces and APIs based on direct client feedback,
+            improving usability and adoption.
           </>,
         ],
         images: [
@@ -151,14 +157,12 @@ const about = {
     institutions: [
       {
         name: "University of British Columbia",
-        description: <>Psychology Year 1-2</>,
+        description: <>Psychology Year</>,
       },
       {
         name: "Lighthouse Labs",
         description: (
-          <>
-            Full Stack Web Development Bootcamp (Ruby on Rails, React.js, Node.js)
-          </>
+          <>Full Stack Web Development (Ruby on Rails, React.js, Node.js)</>
         ),
       },
       {
@@ -177,7 +181,8 @@ const about = {
         title: "Languages",
         description: (
           <>
-            Javascript, HTML, CSS, Python, Golang, Ruby, C, SQL, SASS, Shellscript, Batch Script, JSX, Markdown, Pinescript
+            Javascript, HTML, CSS, Python, Golang, Ruby, C, SQL, SASS,
+            Shellscript, Batch Script, JSX, Markdown, Pinescript
           </>
         ),
         // optional: leave the array empty if you don't want to display images
@@ -212,7 +217,8 @@ const about = {
         title: "Testing Suites",
         description: (
           <>
-            Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium, Mocha, PhantomJS
+            Storybook, Jest, Cypress, Capybara, Poltergeist, Selenium, Mocha,
+            PhantomJS
           </>
         ),
       },
@@ -226,8 +232,11 @@ const about = {
         title: "",
         description: (
           <>
-            <a className={styles.stripped} href="/work"> 
-              <Kbd className={styles.kbdoverview}> <FontAwesomeIcon icon={faExpand} />  Full overview</Kbd>
+            <a className={styles.stripped} href="/work">
+              <Kbd className={styles.kbdoverview}>
+                {" "}
+                <FontAwesomeIcon icon={faExpand} /> Full overview
+              </Kbd>
             </a>
           </>
         ),
@@ -236,43 +245,43 @@ const about = {
             src: "/images/projects/project-01/cover-01.gif",
             alt: "Scheduler",
             width: 19.6,
-            height:10,
+            height: 10,
           },
           {
             src: "/images/projects/project-02/cover-01.gif",
             alt: "Cat_park",
             width: 19.6,
-            height:10,
+            height: 10,
           },
           {
             src: "/images/projects/project-03/cover-01.png",
             alt: "Leaguesearch.gg",
             width: 19.6,
-            height:10,
+            height: 10,
           },
           {
             src: "/images/projects/project-04/cover-01.png",
             alt: "Junglerails",
             width: 19.6,
-            height:10,
+            height: 10,
           },
           {
             src: "/images/projects/project-05/cover-01.png",
             alt: "Miso list",
             width: 19.6,
-            height:10,
+            height: 10,
           },
           {
             src: "/images/projects/project-06/cover-01.png",
             alt: "Tweeter",
             width: 19.6,
-            height:10,
+            height: 10,
           },
           {
             src: "/images/projects/project-07/cover-01.png",
             alt: "Amprofy",
             width: 19.6,
-            height:10,
+            height: 10,
           },
         ],
       },
@@ -296,13 +305,4 @@ const work = {
   // All projects will be listed on the /home and /work routes
 };
 
-export {
-  person,
-  social,
-  newsletter,
-  home,
-  about,
-  blog,
-  work,
-  callletter,
-};
+export { person, social, newsletter, home, about, blog, work, callletter };
