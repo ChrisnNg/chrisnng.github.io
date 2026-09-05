@@ -14,7 +14,7 @@ import {
 } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
-import { StickyScheduleCall } from "@/components";
+import { StickyScheduleCall, ProjectImageCard } from "@/components";
 import styles from "@/components/about/about.module.scss";
 import { person, about, social } from "@/app/resources/content";
 import React from "react";
@@ -487,47 +487,11 @@ export default function About() {
                     {project.images && project.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {project.images.map((image, index) => (
-                          <Flex
+                          <ProjectImageCard
                             key={index}
-                            radius="l"
-                            className={styles.darkoverlay}
-                          >
-                            <RevealFx
-                              translateY={5}
-                              fillWidth
-                              horizontal="start"
-                              delay={2.3}
-                            >
-                              <Flex
-                                radius="l"
-                                //@ts-ignore
-                                minWidth={image.width}
-                                //@ts-ignore
-                                height={image.height}
-                                className={styles.projectspacing}
-                              >
-                                <img
-                                  //@ts-ignore
-                                  alt={image.alt}
-                                  //@ts-ignore
-                                  src={image.src}
-                                  className={styles.projectsimg}
-                                />
-                                <Flex
-                                  fillWidth={true}
-                                  position="absolute"
-                                  height={18}
-                                  horizontal="center"
-                                  vertical="center"
-                                  paddingBottom="32"
-                                  textVariant="display-default-xs"
-                                  className={styles.projectimgtext}
-                                >
-                                  {image.alt}
-                                </Flex>
-                              </Flex>
-                            </RevealFx>
-                          </Flex>
+                            image={image}
+                            delay={2.3}
+                          />
                         ))}
                       </Flex>
                     )}

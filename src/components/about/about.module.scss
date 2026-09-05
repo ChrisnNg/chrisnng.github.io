@@ -65,6 +65,7 @@
 .darkoverlay {
   width: 100%;
   cursor: pointer;
+  outline: none;
 }
 
 .darkoverlay img {
@@ -73,11 +74,13 @@
   transition: all 1s ease;
 }
 
-.darkoverlay:hover img {
+.darkoverlay:hover img,
+.darkoverlay.retained img {
   filter: brightness(100%);
 }
 
-.darkoverlay:hover .projectimgtext {
+.darkoverlay:hover .projectimgtext,
+.darkoverlay.retained .projectimgtext {
   color: transparent;
 }
 
