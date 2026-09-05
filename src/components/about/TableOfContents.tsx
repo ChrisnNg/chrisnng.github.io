@@ -183,7 +183,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                 }
               }}
             >
-              <span className={styles.tocDash} />
+              <span className={styles.tocDot} />
               <span className={styles.tocLabelWrapper}>
                 <span className={styles.tocText}>{section.title}</span>
                 <span className={styles.tocUnderline} />
@@ -210,7 +210,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                         }
                       }}
                     >
-                      <span className={styles.tocSubDash} />
+                      <span className={styles.tocSubDot} />
                       <span className={styles.tocLabelWrapper}>
                         <span className={styles.tocSubText}>{item}</span>
                         <span className={styles.tocSubUnderline} />
