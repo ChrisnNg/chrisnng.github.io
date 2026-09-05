@@ -157,7 +157,7 @@ const about = {
     institutions: [
       {
         name: "University of British Columbia",
-        description: <>Psychology Year</>,
+        description: <>Psychology</>,
       },
       {
         name: "Lighthouse Labs",

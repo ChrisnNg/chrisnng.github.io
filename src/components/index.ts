@@ -5,3 +5,4 @@ export { ProjectCard } from "@/components/ProjectCard";
 export { HeadingLink } from "@/components/HeadingLink";
 export { RouteGuard } from "@/components/RouteGuard";
 export { StickyScheduleCall } from "@/components/about/StickyScheduleCall";
+export { ProjectImageCard } from "@/components/about/ProjectImageCard";

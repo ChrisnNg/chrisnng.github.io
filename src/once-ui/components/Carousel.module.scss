@@ -1,0 +1,65 @@
+@keyframes progressFill {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.indicatorWrapper {
+  display: flex;
+  gap: var(--static-space-6, 6px);
+  padding: 0 var(--static-space-8, 8px);
+  width: 100%;
+  align-items: center;
+}
+
+.track {
+  position: relative;
+  height: 4px;
+  flex: 1;
+  background: var(--neutral-alpha-medium, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-full, 9999px);
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  transition: background var(--transition-micro-medium, 0.2s ease);
+
+  &:hover {
+    background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.3));
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--brand-solid-strong);
+  }
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--brand-solid-strong, #10b981);
+  border-radius: inherit;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.filled {
+  transform: scaleX(1);
+}
+
+.animating {
+  animation-name: progressFill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.paused {
+  animation-play-state: paused !important;
+}
