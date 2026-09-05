@@ -159,7 +159,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       aria-label="Table of contents"
       fitWidth
       paddingTop="16"
-      gap="14"
+      gap="16"
       style={{
         whiteSpace: "nowrap",
       }}
