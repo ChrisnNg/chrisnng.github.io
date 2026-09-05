@@ -24,7 +24,7 @@ const Carousel: React.FC<CarouselProps> = ({
   indicator = "line",
   aspectRatio = "16 / 9",
   sizes,
-  revealedByDefault = false,
+  revealedByDefault = true,
   interval = 5000,
   autoRotate = true,
   ...rest
