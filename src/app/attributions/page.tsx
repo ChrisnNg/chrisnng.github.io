@@ -56,36 +56,10 @@ export default function Attributions() {
           </Column>
 
           <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="l">
-            <RevealFx translateY={5} fillWidth horizontal="start">
-              This portfolio website is built with{" "}
-              <SmartLink
-                href="https://once-ui.com/templates/magic-portfolio"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Once UI
-              </SmartLink>{" "}
-              - a modular design system and component library for React and Next.js.
-            </RevealFx>
-            <RevealFx translateY={5} fillWidth horizontal="start" delay={0.1}>
-              Once UI provides the core UI primitives, design tokens, and effects used
-              throughout this project including layout components (Flex, Column, Row),
-              typography (Heading, Text), interactive elements (Button, Card, Badge),
-              and visual effects (RevealFx, TiltFx, GlitchFx, LetterFx).
-            </RevealFx>
-            <RevealFx translateY={5} fillWidth horizontal="start" delay={0.2}>
-              The Magic Portfolio template by Once UI serves as the foundation for this
-              portfolio. Visit{" "}
-              <SmartLink
-                href="https://once-ui.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                once-ui.com
-              </SmartLink>{" "}
-              to learn more about Once UI and explore their component library.
-            </RevealFx>
-          </Column>
+                      <RevealFx translateY={5} fillWidth horizontal="start">
+                        a modular design system and component library for React and Next.js
+                      </RevealFx>
+                    </Column>
 
           <Heading
             as="h2"
