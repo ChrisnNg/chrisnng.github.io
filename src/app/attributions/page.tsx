@@ -62,8 +62,9 @@ export default function Attributions() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
-                                    Once UI - A modular design system and component library for React and Next.js
-                                  </SmartLink>
+                                    Once UI
+                                  </SmartLink>{" "}
+                                  - A modular design system and component library for React and Next.js
                                 </RevealFx>
                               </Column>
 
