@@ -13,14 +13,16 @@ interface ProjectImageProps {
     height?: number | string;
   };
   delay?: number;
+  href?: string;
 }
 
 export const ProjectImageCard: React.FC<ProjectImageProps> = ({
   image,
   delay = 2.3,
+  href = "/work",
 }) => {
   return (
-    <SmartLink href="/work" fillWidth style={{ textDecoration: "none" }}>
+    <SmartLink fillWidth href={href} style={{ textDecoration: "none" }}>
       <Flex
         radius="l"
         className={`${styles.darkoverlay}`}

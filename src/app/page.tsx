@@ -49,6 +49,19 @@ export async function generateMetadata() {
 }
 
 export default function About() {
+  const getProjectSlug = (alt: string) => {
+    const mapping: Record<string, string> = {
+      "Scheduler": "scheduler",
+      "Cat_park": "cat_park",
+      "Leaguesearch.gg": "leaguesearch",
+      "Junglerails": "junglerails",
+      "Miso list": "misolist",
+      "Tweeter": "tweeter",
+      "Amprofy": "amprofy"
+    };
+    return mapping[alt] ? `/work/${mapping[alt]}` : "/work";
+  };
+
   const structure = [
     {
       title: about.intro.title,
@@ -491,6 +504,7 @@ export default function About() {
                             key={index}
                             image={image}
                             delay={2.3}
+                            href={getProjectSlug(image.alt)}
                           />
                         ))}
                       </Flex>
