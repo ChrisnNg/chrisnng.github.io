@@ -52,7 +52,6 @@ const HoloFx: React.FC<HoloFxProps> = ({
   ...rest
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  let lastCall = 0;
 
   const lightDefaults = {
     opacity: 30,
@@ -79,6 +78,7 @@ const HoloFx: React.FC<HoloFxProps> = ({
   };
 
   useEffect(() => {
+    let lastCall = 0;
     const handleMouseMove = (event: MouseEvent) => {
       const now = Date.now();
       if (now - lastCall < 16) return;
