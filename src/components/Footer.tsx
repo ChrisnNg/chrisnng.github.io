@@ -27,13 +27,16 @@ export const Footer = () => {
           <Text onBackground="neutral-weak">© {currentYear} /</Text>
           <Text paddingX="4">{person.name}</Text>
           <Text onBackground="neutral-weak">
-            {/* Usage of this template requires attribution. Please don't remove the link to Once UI. */}
-            / Built with{" "}
+            /{" "}
             <SmartLink
-              style={{ marginLeft: "-0.125rem" }}
-              href="https://once-ui.com/templates/magic-portfolio"
+              href="/attributions"
+              unstyled
+              className="neutral-weak"
+              selected
             >
-              Once UI
+              <text style={{ color: "#595959 !important" }}>
+                cc attributions
+              </text>
             </SmartLink>
           </Text>
         </Text>
@@ -49,7 +52,7 @@ export const Footer = () => {
                   size="s"
                   variant="ghost"
                 />
-              )
+              ),
           )}
         </Flex>
       </Flex>
