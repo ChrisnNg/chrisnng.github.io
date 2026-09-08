@@ -56,10 +56,16 @@ export default function Attributions() {
           </Column>
 
           <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="l">
-                      <RevealFx translateY={5} fillWidth horizontal="start">
-                        a modular design system and component library for React and Next.js
-                      </RevealFx>
-                    </Column>
+                                <RevealFx translateY={5} fillWidth horizontal="start">
+                                  <SmartLink
+                                    href="https://once-ui.com/templates/magic-portfolio"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    Once UI - A modular design system and component library for React and Next.js
+                                  </SmartLink>
+                                </RevealFx>
+                              </Column>
 
           <Heading
             as="h2"
