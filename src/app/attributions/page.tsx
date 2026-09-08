@@ -62,12 +62,7 @@ export default function Attributions() {
             </Text>
           </Column>
 
-          <Column
-            textVariant="body-default-l"
-            fillWidth
-            gap="m"
-            marginBottom="l"
-          >
+          <Column textVariant="body-default-l" fillWidth gap="m">
             <RevealFx translateY={5} fillWidth horizontal="start">
               <Text variant="body-default-m" onBackground="neutral-weak">
                 <SmartLink
