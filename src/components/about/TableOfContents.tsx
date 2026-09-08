@@ -203,76 +203,107 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   return (
     <>
       {/* Desktop sidebar navigation */}
-      <Column
-        as="nav"
-        aria-label="Table of contents"
-        fitWidth
-        paddingTop="16"
-        gap="16"
-        style={{
-          whiteSpace: "nowrap",
-        }}
-        className={`${styles.tocNav} ${styles.tocNavDesktop}`}
-      >
-        {visibleSections.map((section, sectionIndex) => {
-          const isActive = activeSection === section.title;
+      <div className={styles.tocNavDesktop}>
+        <div className={styles.tocSpineContainer}>
+          {/* Vertical progress spine connecting sections */}
+          <div className={styles.tocSpineTrack} aria-hidden="true">
+            <div
+              className={styles.tocSpineFill}
+              style={{ height: `${scrollProgress}%` }}
+            />
+          </div>
 
-          return (
-            <Column key={sectionIndex} className={styles.tocSection}>
-              <div
-                role="button"
-                tabIndex={0}
-                aria-current={isActive ? "true" : undefined}
-                className={`${styles.tocItem} ${isActive ? styles.tocItemActive : ""}`}
-                onClick={() => scrollTo(section.title, 80)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    scrollTo(section.title, 80);
-                  }
-                }}
-              >
-                <span className={styles.tocDot} />
-                <span className={styles.tocLabelWrapper}>
-                  <span className={styles.tocText}>{section.title}</span>
-                  <span className={styles.tocUnderline} />
-                </span>
-              </div>
+          <Column
+            as="nav"
+            aria-label="Table of contents"
+            fitWidth
+            gap="16"
+            style={{
+              whiteSpace: "nowrap",
+            }}
+            className={styles.tocNav}
+          >
+            {visibleSections.map((section, sectionIndex) => {
+              const isActive = activeSection === section.title;
 
-              {about.tableOfContent.subItems && section.items.length > 0 && (
-                <Column gap="8">
-                  {section.items.map((item, itemIndex) => {
-                    const isSubActive = activeSection === item;
+              return (
+                <Column key={sectionIndex} className={styles.tocSection}>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`${styles.tocItem} ${isActive ? styles.tocItemActive : ""}`}
+                    onClick={() => scrollTo(section.title, 80)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        scrollTo(section.title, 80);
+                      }
+                    }}
+                  >
+                    <span className={styles.tocDot} />
+                    <span className={styles.tocLabelWrapper}>
+                      <span className={styles.tocText}>{section.title}</span>
+                      <span className={styles.tocUnderline} />
+                    </span>
+                  </div>
 
-                    return (
-                      <div
-                        role="button"
-                        tabIndex={0}
-                        key={itemIndex}
-                        aria-current={isSubActive ? "true" : undefined}
-                        className={`${styles.tocSubItem} ${isSubActive ? styles.tocSubItemActive : ""}`}
-                        onClick={() => scrollTo(item, 80)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            scrollTo(item, 80);
-                          }
-                        }}
-                      >
-                        <span className={styles.tocSubDot} />
-                        <span className={styles.tocLabelWrapper}>
-                          <span className={styles.tocSubText}>{item}</span>
-                          <span className={styles.tocSubUnderline} />
-                        </span>
-                      </div>
-                    );
-                  })}
+                  {about.tableOfContent.subItems && section.items.length > 0 && (
+                    <Column gap="8">
+                      {section.items.map((item, itemIndex) => {
+                        const isSubActive = activeSection === item;
+
+                        return (
+                          <div
+                            role="button"
+                            tabIndex={0}
+                            key={itemIndex}
+                            aria-current={isSubActive ? "true" : undefined}
+                            className={`${styles.tocSubItem} ${isSubActive ? styles.tocSubItemActive : ""}`}
+                            onClick={() => scrollTo(item, 80)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                scrollTo(item, 80);
+                              }
+                            }}
+                          >
+                            <span className={styles.tocSubDot} />
+                            <span className={styles.tocLabelWrapper}>
+                              <span className={styles.tocSubText}>{item}</span>
+                              <span className={styles.tocSubUnderline} />
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </Column>
+                  )}
                 </Column>
-              )}
-            </Column>
-          );
-        })}
-      </Column>
+              );
+            })}
+          </Column>
+        </div>
+
+        {/* Scroll progress bar beneath the sidebar navigation */}
+        <div
+          className={styles.tocProgressFooter}
+          role="progressbar"
+          aria-valuenow={Math.round(scrollProgress)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Sidebar scroll progress"
+        >
+          <div className={styles.tocProgressLineTrack}>
+            <div
+              className={styles.tocProgressLineFill}
+              style={{ width: `${scrollProgress}%` }}
+            />
+          </div>
+          <span className={styles.tocProgressText}>
+            {Math.round(scrollProgress)}%
+          </span>
+        </div>
+      </div>
 
       {/* Mobile compact floating navigation bar above main header */}
       {(() => {
