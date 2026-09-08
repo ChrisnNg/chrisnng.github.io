@@ -24,6 +24,19 @@
   .blockAlign {
     align-self: center;
   }
+
+  .darkoverlay img,
+  .darkoverlay:hover img,
+  .darkoverlay.retained img {
+    filter: brightness(45%);
+  }
+
+  .projectimgtext,
+  .darkoverlay:hover .projectimgtext,
+  .darkoverlay.retained .projectimgtext {
+    color: white !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.9);
+  }
 }
 
 @media (min-width: 1500px) {

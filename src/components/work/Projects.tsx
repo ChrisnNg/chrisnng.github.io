@@ -1,6 +1,7 @@
 import { getPosts } from "@/app/utils/utils";
 import { Column } from "@/once-ui/components";
 import { ProjectCard } from "@/components";
+import styles from "./Projects.module.scss";
 
 interface ProjectsProps {
   range?: [number, number?];
@@ -21,7 +22,7 @@ export function Projects({ range }: ProjectsProps) {
     : sortedProjects;
 
   return (
-    <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
+    <Column fillWidth gap="xl" marginBottom="40" paddingX="l" className={styles.container}>
       {displayedProjects.map((post, index) => (
         <ProjectCard
           priority={index < 2}

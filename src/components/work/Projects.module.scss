@@ -1,3 +1,10 @@
+.container {
+    @media (--s) {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
 .hover {
     transition: var(--transition-micro-medium);
 
