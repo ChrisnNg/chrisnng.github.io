@@ -1,0 +1,9 @@
+.card {
+    .viewDetails {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    &:hover .viewDetails {
+        opacity: 1;
+    }
+}
