@@ -375,9 +375,17 @@
   border-radius: 50%;
   background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.3));
   flex-shrink: 0;
-  transition: transform var(--transition-micro-medium, 0.2s ease),
+  transition: opacity 0.25s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               background var(--transition-micro-medium, 0.2s ease),
               box-shadow var(--transition-micro-medium, 0.2s ease);
+}
+
+.tocDotPassed,
+.tocSubDotPassed {
+  opacity: 0 !important;
+  transform: scale(0) !important;
+  pointer-events: none;
 }
 
 .tocLabelWrapper {
@@ -420,6 +428,7 @@
     background: var(--brand-solid-strong, #10b981);
     transform: scale(1.35);
     box-shadow: 0 0 8px var(--brand-alpha-strong, rgba(16, 185, 129, 0.6));
+    opacity: 1 !important;
   }
 
   .tocText {
@@ -472,7 +481,8 @@
   border-radius: 50%;
   background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.25));
   flex-shrink: 0;
-  transition: transform var(--transition-micro-medium, 0.2s ease),
+  transition: opacity 0.25s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               background var(--transition-micro-medium, 0.2s ease),
               box-shadow var(--transition-micro-medium, 0.2s ease);
 }
@@ -508,6 +518,7 @@
     background: var(--brand-solid-strong, #10b981);
     transform: scale(1.35);
     box-shadow: 0 0 6px var(--brand-alpha-strong, rgba(16, 185, 129, 0.5));
+    opacity: 1 !important;
   }
 
   .tocSubText {

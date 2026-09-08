@@ -77,6 +77,11 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     setSpineTrackTop(firstCenter);
     setSpineTrackHeight(totalTrack);
 
+    if (activeIdx <= 0 && fraction <= 0) {
+      setSpineHeightPx(0);
+      return;
+    }
+
     if (activeIdx >= dots.length - 1 || fraction >= 1) {
       setSpineHeightPx(totalTrack);
     } else {
@@ -100,6 +105,14 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     const scrollY = window.scrollY;
     const innerHeight = window.innerHeight;
     const scrollHeight = document.documentElement.scrollHeight;
+
+    // Check top of page - fully retract immediately when at top
+    if (scrollY <= 10) {
+      setActiveSection(sections[0].title);
+      setScrollProgress(0);
+      updateSpinePixels(0, 0);
+      return;
+    }
 
     // Check bottom of page
     if (scrollY + innerHeight >= scrollHeight - 40) {
@@ -127,9 +140,14 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 
     if (positions.length === 0) return;
 
-    const currentTrigger = scrollY + threshold;
+    // Trigger scroll position where each section activates
+    // Section 0 starts at scrollY = 0 so progress retracts fully to 0 at the top
+    const triggerScrolls = positions.map((p, idx) => {
+      if (idx === 0) return 0;
+      return Math.max(1, p.docTop - threshold);
+    });
 
-    if (currentTrigger <= positions[0].docTop) {
+    if (scrollY <= triggerScrolls[0]) {
       setActiveSection(positions[0].title);
       setScrollProgress(0);
       updateSpinePixels(0, 0);
@@ -139,23 +157,23 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     let activeIdx = 0;
     let fraction = 0;
 
-    for (let i = 0; i < positions.length - 1; i++) {
-      const currTop = positions[i].docTop;
-      const nextTop = positions[i + 1].docTop;
+    for (let i = 0; i < triggerScrolls.length - 1; i++) {
+      const startScroll = triggerScrolls[i];
+      const endScroll = triggerScrolls[i + 1];
 
-      if (currentTrigger >= currTop && currentTrigger < nextTop) {
+      if (scrollY >= startScroll && scrollY < endScroll) {
         activeIdx = i;
-        const dist = nextTop - currTop;
-        fraction = dist > 0 ? (currentTrigger - currTop) / dist : 0;
+        const diff = endScroll - startScroll;
+        fraction = diff > 0 ? (scrollY - startScroll) / diff : 0;
         break;
-      } else if (i === positions.length - 2 && currentTrigger >= nextTop) {
+      } else if (i === triggerScrolls.length - 2 && scrollY >= endScroll) {
         activeIdx = i + 1;
         fraction = 1;
       }
     }
 
-    if (activeIdx >= positions.length - 1) {
-      activeIdx = positions.length - 1;
+    if (activeIdx >= triggerScrolls.length - 1) {
+      activeIdx = triggerScrolls.length - 1;
       fraction = 1;
     }
 
@@ -238,10 +256,15 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       const sections = visibleSectionsRef.current;
       const targetIdx = sections.findIndex((s) => s.title === id);
       if (targetIdx !== -1) {
-        const totalIntervals = Math.max(1, sections.length - 1);
-        const targetPercent = (targetIdx / totalIntervals) * 100;
-        setScrollProgress(targetPercent);
-        updateSpinePixels(targetIdx, 0);
+        if (targetIdx === 0) {
+          setScrollProgress(0);
+          updateSpinePixels(0, 0);
+        } else {
+          const totalIntervals = Math.max(1, sections.length - 1);
+          const targetPercent = (targetIdx / totalIntervals) * 100;
+          setScrollProgress(targetPercent);
+          updateSpinePixels(targetIdx, 0);
+        }
       }
 
       window.scrollTo({
@@ -261,6 +284,14 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 
   if (!about.tableOfContent.display) return null;
 
+  const activeIndex = visibleSections.findIndex((s) => s.title === activeSection);
+
+  const isSectionPassed = (sectionIndex: number) => {
+    // Keep the solid filled-in dot when at that particular section;
+    // only hide dots for sections that have already been passed
+    return activeIndex !== -1 && sectionIndex < activeIndex;
+  };
+
   return (
     <>
       {/* Desktop sidebar navigation with synced progress spine & progress bar */}
@@ -279,6 +310,8 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
               className={styles.tocSpineFill}
               style={{
                 height: spineTrackHeight > 0 ? `${spineHeightPx}px` : `${scrollProgress}%`,
+                opacity: spineHeightPx > 0 || scrollProgress > 0 ? 1 : 0,
+                transition: "height 0.12s ease-out, opacity 0.15s ease-out",
               }}
             />
           </div>
@@ -295,6 +328,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
           >
             {visibleSections.map((section, sectionIndex) => {
               const isActive = activeSection === section.title;
+              const isPassed = isSectionPassed(sectionIndex);
 
               return (
                 <Column key={sectionIndex} className={styles.tocSection}>
@@ -311,7 +345,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                       }
                     }}
                   >
-                    <span className={styles.tocDot} />
+                    <span
+                      className={`${styles.tocDot} ${isPassed ? styles.tocDotPassed : ""}`}
+                    />
                     <span className={styles.tocLabelWrapper}>
                       <span className={styles.tocText}>{section.title}</span>
                       <span className={styles.tocUnderline} />
@@ -338,7 +374,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                               }
                             }}
                           >
-                            <span className={styles.tocSubDot} />
+                            <span
+                              className={`${styles.tocSubDot} ${isPassed ? styles.tocSubDotPassed : ""}`}
+                            />
                             <span className={styles.tocLabelWrapper}>
                               <span className={styles.tocSubText}>{item}</span>
                               <span className={styles.tocSubUnderline} />
@@ -391,7 +429,11 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
               >
                 <div
                   className={styles.tocMobileProgressBar}
-                  style={{ width: `${scrollProgress}%` }}
+                  style={{
+                    width: `${scrollProgress}%`,
+                    opacity: scrollProgress > 0 ? 1 : 0,
+                    transition: "width 0.12s ease-out, opacity 0.15s ease-out",
+                  }}
                 />
               </div>
             </div>
