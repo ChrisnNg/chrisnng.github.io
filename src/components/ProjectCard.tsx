@@ -47,18 +47,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }))}
       />
       
-      {/* Positioned link absolute to the .card container */}
-      {href && (
-          <SmartLink
-              className={styles.viewDetails}
-              style={{ margin: "0" }}
-              href={href}
-              unstyled
-          >
-              <Text variant="body-default-s">View Details</Text>
-          </SmartLink>
-      )}
-
       <Column
         fillWidth
         horizontal="center"
