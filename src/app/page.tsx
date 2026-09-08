@@ -59,7 +59,7 @@ export default function About() {
       "Tweeter": "tweeter",
       "Amprofy": "amprofy"
     };
-    return mapping[alt] ? `/work/${mapping[alt]}` : "/work";
+    return mapping[alt] ? `/work#${mapping[alt]}` : "/work";
   };
 
   const structure = [

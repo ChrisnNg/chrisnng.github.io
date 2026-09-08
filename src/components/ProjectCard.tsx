@@ -12,6 +12,7 @@ import {
 import styles from "./ProjectCard.module.scss";
 
 interface ProjectCardProps {
+  id?: string;
   href: string;
   priority?: boolean;
   images: string[];
@@ -26,6 +27,7 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
+  id,
   href,
   images = [],
   title,
@@ -38,7 +40,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   features,
 }) => {
   return (
-    <Column fillWidth gap="m" horizontal="center" className={styles.card}>
+    <Column id={id} fillWidth gap="m" horizontal="center" className={styles.card}>
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
         images={images.map((image) => ({
