@@ -166,7 +166,7 @@ export default function Attributions() {
                   >
                     PrismJS
                   </SmartLink>{" "}
-                  via Once UI's CodeBlock component
+                  via Once UI&apos;s CodeBlock component
                 </Text>
               </RevealFx>
             </Column>
