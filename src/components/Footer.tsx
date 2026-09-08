@@ -27,9 +27,11 @@ export const Footer = () => {
           <Text onBackground="neutral-weak">© {currentYear} /</Text>
           <Text paddingX="4">{person.name}</Text>
           <Text onBackground="neutral-weak">
-                                /{" "}
-                                <SmartLink href="/attributions">cc attributions</SmartLink>
-                              </Text>
+                                          /{" "}
+                                          <Text variant="body-default-s" onBackground="neutral-weak" textDecoration="underline">
+                                            <SmartLink href="/attributions">cc attributions</SmartLink>
+                                          </Text>
+                                        </Text>
         </Text>
         <Flex gap="16">
           {social.map(
