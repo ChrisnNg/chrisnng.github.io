@@ -150,6 +150,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
           />
         )}
         {!isLoading && !isVideo && !isYouTube && (
+          /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={src}
             alt={alt}
