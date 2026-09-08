@@ -1,4 +1,11 @@
-import { Column, Flex, Heading, SmartLink, Text, RevealFx } from "@/once-ui/components";
+import {
+  Column,
+  Flex,
+  Heading,
+  SmartLink,
+  Text,
+  RevealFx,
+} from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import styles from "@/components/about/about.module.scss";
 
@@ -55,20 +62,26 @@ export default function Attributions() {
             </Text>
           </Column>
 
-          <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="l">
-                                <RevealFx translateY={5} fillWidth horizontal="start">
-                                  <Text variant="body-default-m" onBackground="neutral-weak">
-                                    <SmartLink
-                                      href="https://once-ui.com/templates/magic-portfolio"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      Once UI
-                                    </SmartLink>{" "}
-                                    - A modular design system and component library for React and Next.js
-                                  </Text>
-                                </RevealFx>
-                              </Column>
+          <Column
+            textVariant="body-default-l"
+            fillWidth
+            gap="m"
+            marginBottom="l"
+          >
+            <RevealFx translateY={5} fillWidth horizontal="start">
+              <Text variant="body-default-m" onBackground="neutral-weak">
+                <SmartLink
+                  href="https://once-ui.com/templates/magic-portfolio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Once UI
+                </SmartLink>{" "}
+                - A modular design system and component library for React and
+                Next.js
+              </Text>
+            </RevealFx>
+          </Column>
 
           <Heading
             as="h2"
@@ -76,11 +89,7 @@ export default function Attributions() {
             variant="display-strong-s"
             marginBottom="m"
             marginTop="40"
-          >
-            <RevealFx translateY={5} fillWidth horizontal="start" delay={0.3}>
-              Additional Credits
-            </RevealFx>
-          </Heading>
+          ></Heading>
           <Column fillWidth gap="l">
             <Column fillWidth gap="4">
               <RevealFx translateY={5} fillWidth horizontal="start" delay={0.4}>
@@ -153,9 +162,6 @@ export default function Attributions() {
               </RevealFx>
             </Column>
             <Column fillWidth gap="4">
-              <RevealFx translateY={5} fillWidth horizontal="start" delay={1.2}>
-                <Text variant="heading-strong-l">Code Syntax Highlighting</Text>
-              </RevealFx>
               <RevealFx translateY={5} fillWidth horizontal="start" delay={1.3}>
                 <Text variant="body-default-m" onBackground="neutral-weak">
                   <SmartLink
