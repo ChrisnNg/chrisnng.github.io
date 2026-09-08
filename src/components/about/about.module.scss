@@ -428,6 +428,7 @@
     background: var(--brand-solid-strong, #10b981);
     transform: scale(1.35);
     box-shadow: 0 0 8px var(--brand-alpha-strong, rgba(16, 185, 129, 0.6));
+    opacity: 1 !important;
   }
 
   .tocText {
@@ -517,6 +518,8 @@
     background: var(--brand-solid-strong, #10b981);
     transform: scale(1.35);
     box-shadow: 0 0 6px var(--brand-alpha-strong, rgba(16, 185, 129, 0.5));
+    opacity: 1 !important;
+  }
   }
 
   .tocSubText {

@@ -284,11 +284,12 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 
   if (!about.tableOfContent.display) return null;
 
+  const activeIndex = visibleSections.findIndex((s) => s.title === activeSection);
+
   const isSectionPassed = (sectionIndex: number) => {
-    if (scrollProgress <= 0) return false;
-    const totalIntervals = Math.max(1, visibleSections.length - 1);
-    const sectionTargetProgress = (sectionIndex / totalIntervals) * 100;
-    return scrollProgress >= sectionTargetProgress + 0.5;
+    // Keep the solid filled-in dot when at that particular section;
+    // only hide dots for sections that have already been passed
+    return activeIndex !== -1 && sectionIndex < activeIndex;
   };
 
   return (
