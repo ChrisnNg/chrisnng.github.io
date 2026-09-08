@@ -1,0 +1,26 @@
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.viewDetails {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 20; /* Increased z-index */
+    pointer-events: none;
+    background: var(--neutral-background-strong);
+    padding: 8px 16px;
+    border-radius: var(--radius-l);
+    border: 1px solid var(--neutral-border-medium);
+    display: flex; /* Ensure flex layout */
+    align-items: center;
+    gap: 8px;
+}
+
+.card:hover .viewDetails {
+    opacity: 1;
+    pointer-events: auto;
+}
