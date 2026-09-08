@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Flex, RevealFx } from "@/once-ui/components";
+import { Flex, RevealFx, SmartLink, Text } from "@/once-ui/components";
 import styles from "./about.module.scss";
 
 interface ProjectImageProps {
@@ -13,11 +13,13 @@ interface ProjectImageProps {
     height?: number | string;
   };
   delay?: number;
+  href?: string;
 }
 
 export const ProjectImageCard: React.FC<ProjectImageProps> = ({
   image,
   delay = 2.3,
+  href,
 }) => {
   const [isRetained, setIsRetained] = useState(false);
 
@@ -67,6 +69,17 @@ export const ProjectImageCard: React.FC<ProjectImageProps> = ({
           >
             {image.alt}
           </Flex>
+
+          {href && (
+            <SmartLink
+              className={styles.viewDetails}
+              style={{ margin: "0" }}
+              href={href}
+              unstyled
+            >
+              <Text variant="body-default-s">View Details</Text>
+            </SmartLink>
+          )}
         </Flex>
       </RevealFx>
     </Flex>
