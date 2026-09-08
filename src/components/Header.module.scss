@@ -16,6 +16,11 @@
         top: auto;
         position: fixed;
         bottom: var(--static-space-24);
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 0 var(--static-space-12);
+        box-sizing: border-box;
     }
 
     .mask {

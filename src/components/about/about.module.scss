@@ -12,9 +12,21 @@
   top: var(--static-space-64);
 }
 
+.introHeader {
+  min-height: 160px;
+}
+
 @media (--s) {
   .avatar {
     top: auto;
+    padding-bottom: 0 !important;
+    gap: var(--static-space-12) !important;
+  }
+
+  .introHeader {
+    min-height: auto !important;
+    margin-top: var(--static-space-12) !important;
+    margin-bottom: var(--static-space-24) !important;
   }
 
   .textAlign {
@@ -23,6 +35,19 @@
 
   .blockAlign {
     align-self: center;
+  }
+
+  .darkoverlay img,
+  .darkoverlay:hover img,
+  .darkoverlay.retained img {
+    filter: brightness(45%);
+  }
+
+  .projectimgtext,
+  .darkoverlay:hover .projectimgtext,
+  .darkoverlay.retained .projectimgtext {
+    color: white !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.9);
   }
 }
 
@@ -107,11 +132,197 @@
   -ms-animation: fadeIn 3s;
 }
 
+/* Sticky Schedule a Call (desktop sidebar) */
+.stickyCallWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.96);
+  pointer-events: none;
+  overflow: hidden;
+  margin-top: calc(-1 * var(--static-space-m, 16px));
+  padding: 0;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s ease,
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-top 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: max-height, opacity, transform, margin-top;
+
+  @media (--s) {
+    display: none !important;
+  }
+}
+
+.stickyCallWrapperVisible {
+  max-height: 64px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  margin-top: 0;
+  padding: var(--static-space-2, 2px) 0;
+}
+
 /* Table of Contents Navigation */
 .tocNav {
   user-select: none;
   width: fit-content;
   align-self: center;
+}
+
+.tocNavDesktop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  user-select: none;
+  padding-top: 0;
+  gap: var(--static-space-12, 12px);
+
+  @media (--s) {
+    display: none !important;
+  }
+}
+
+.tocSpineContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.tocSpineTrack {
+  position: absolute;
+  left: 2px;
+  width: 2px;
+  background: transparent;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tocSpineFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, var(--brand-solid-weak, #059669), var(--brand-solid-strong, #10b981));
+  box-shadow: 0 0 8px var(--brand-alpha-strong, rgba(16, 185, 129, 0.6));
+  border-radius: 2px;
+  transition: height 0.12s ease-out;
+}
+
+.tocNavMobile {
+  display: none !important;
+
+  @media (--s) {
+    display: flex !important;
+    position: fixed;
+    bottom: calc(var(--static-space-24) + 48px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    pointer-events: none;
+    padding: 0 var(--static-space-12);
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease;
+  }
+}
+
+.tocMobilePill {
+  pointer-events: auto;
+  user-select: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface-background, rgba(18, 18, 18, 0.85));
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: var(--radius-m-4, 18px);
+  box-shadow: var(--shadow-l, 0 8px 32px rgba(0, 0, 0, 0.4));
+  padding: 3px 6px 4px 6px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.tocMobileItems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--static-space-2, 2px);
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tocMobileItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-m-2, 12px);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: var(--font-size-label-s, 12px);
+  font-family: var(--font-family-body, inherit);
+  color: var(--neutral-on-background-weak, rgba(255, 255, 255, 0.6));
+  transition: background 0.2s ease, color 0.2s ease;
+  outline: none;
+  border: none;
+  background: transparent;
+
+  &:hover {
+    color: var(--neutral-on-background-strong, #ffffff);
+    background: var(--neutral-alpha-weak);
+  }
+}
+
+.tocMobileItemActive {
+  background: var(--brand-alpha-weak, rgba(16, 185, 129, 0.15));
+  color: var(--brand-on-background-strong, #ffffff);
+  font-weight: var(--font-weight-heading-strong, 600);
+
+  &:hover {
+    background: var(--brand-alpha-weak, rgba(16, 185, 129, 0.22));
+    color: var(--brand-on-background-strong, #ffffff);
+  }
+}
+
+.tocMobileDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--brand-solid-strong, #10b981);
+  box-shadow: 0 0 6px var(--brand-alpha-strong, rgba(16, 185, 129, 0.6));
+  flex-shrink: 0;
+}
+
+.tocMobileProgressTrack {
+  width: calc(100% - 12px);
+  height: 2.5px;
+  background: var(--neutral-alpha-weak, rgba(255, 255, 255, 0.12));
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.tocMobileProgressBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-solid-weak, #059669), var(--brand-solid-strong, #10b981));
+  box-shadow: 0 0 6px var(--brand-alpha-strong, rgba(16, 185, 129, 0.5));
+  border-radius: 2px;
+  transition: width 0.12s ease-out;
 }
 
 .tocSection {
@@ -155,6 +366,8 @@
 
 .tocDot,
 .tocDash {
+  position: relative;
+  z-index: 2;
   width: 6px;
   height: 6px;
   min-width: 6px;

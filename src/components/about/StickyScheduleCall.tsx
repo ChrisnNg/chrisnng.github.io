@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import classNames from "classnames";
 import { Flex, Icon, IconButton } from "@/once-ui/components";
+import styles from "./about.module.scss";
 
 interface StickyScheduleCallProps {
   link: string;
@@ -35,15 +37,11 @@ export function StickyScheduleCall({
   }, [targetId]);
 
   return (
-    <Flex
-      horizontal="center"
-      fillWidth
-      style={{
-        opacity: isScrolledPast ? 1 : 0,
-        pointerEvents: isScrolledPast ? "auto" : "none",
-        transform: isScrolledPast ? "translateY(0)" : "translateY(6px)",
-        transition: "opacity 0.35s ease, transform 0.35s ease",
-      }}
+    <div
+      className={classNames(styles.stickyCallWrapper, {
+        [styles.stickyCallWrapperVisible]: isScrolledPast,
+      })}
+      aria-hidden={!isScrolledPast}
     >
       <Flex
         fitWidth
@@ -75,6 +73,6 @@ export function StickyScheduleCall({
           tabIndex={isScrolledPast ? 0 : -1}
         />
       </Flex>
-    </Flex>
+    </div>
   );
 }

@@ -90,6 +90,7 @@ export const Header = () => {
         horizontal="center"
       >
         <Flex
+          hide="s"
           paddingLeft="12"
           fillWidth
           vertical="center"
@@ -116,43 +117,25 @@ export const Header = () => {
               )}
               <Line vert maxHeight="24" />
               {routes["/work"] && (
-                <>
-                  <ToggleButton
-                    className="s-flex-hide"
-                    prefixIcon="grid"
-                    href="/work"
-                    label={work.label}
-                    selected={pathname.startsWith("/work")}
-                  />
-                  <ToggleButton
-                    className="s-flex-show"
-                    prefixIcon="grid"
-                    href="/work"
-                    selected={pathname.startsWith("/work")}
-                  />
-                </>
+                <ToggleButton
+                  prefixIcon="grid"
+                  href="/work"
+                  label={work.label}
+                  selected={pathname.startsWith("/work")}
+                />
               )}
               {routes["/blog"] && (
-                <>
-                  <ToggleButton
-                    className="s-flex-hide"
-                    prefixIcon="book"
-                    href="/blog"
-                    label={blog.label}
-                    selected={pathname.startsWith("/blog")}
-                  />
-                  <ToggleButton
-                    className="s-flex-show"
-                    prefixIcon="book"
-                    href="/blog"
-                    selected={pathname.startsWith("/blog")}
-                  />
-                </>
+                <ToggleButton
+                  prefixIcon="book"
+                  href="/blog"
+                  label={blog.label}
+                  selected={pathname.startsWith("/blog")}
+                />
               )}
             </Flex>
           </Flex>
         </Flex>
-        <Flex fillWidth horizontal="end" vertical="center">
+        <Flex hide="s" fillWidth horizontal="end" vertical="center">
           <Flex
             paddingRight="12"
             horizontal="end"

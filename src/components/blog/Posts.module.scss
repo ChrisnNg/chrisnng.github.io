@@ -1,7 +1,13 @@
 .hover {
     transition: var(--transition-micro-medium);
 
-    &:hover {
-        transform: translateX(var(--static-space-8));
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: translateX(var(--static-space-8));
+        }
     }
+}
+
+.image {
+    width: 100%;
 }

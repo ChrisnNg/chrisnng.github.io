@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { Column } from "@/once-ui/components";
 import styles from "./about.module.scss";
 
@@ -18,6 +19,16 @@ interface TableOfContentsProps {
   };
 }
 
+const getCompactTitle = (title: string) => {
+  const lower = title.toLowerCase();
+  if (lower.includes("intro")) return "Intro";
+  if (lower.includes("work")) return "Work";
+  if (lower.includes("education")) return "Education";
+  if (lower.includes("technical") || lower.includes("skill")) return "Skills";
+  if (lower.includes("project")) return "Projects";
+  return title;
+};
+
 const TableOfContents: React.FC<TableOfContentsProps> = ({
   structure,
   about,
@@ -32,8 +43,16 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   const [activeSection, setActiveSection] = useState<string>(
     visibleSections[0]?.title || ""
   );
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [spineHeightPx, setSpineHeightPx] = useState<number>(0);
+  const [spineTrackTop, setSpineTrackTop] = useState<number>(14);
+  const [spineTrackHeight, setSpineTrackHeight] = useState<number>(0);
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const isClickScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const activeMobileItemRef = useRef<HTMLButtonElement | null>(null);
 
   const cancelClickScroll = useCallback(() => {
     isClickScrollingRef.current = false;
@@ -43,7 +62,36 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     }
   }, []);
 
-  const updateActiveSection = useCallback(() => {
+  const updateSpinePixels = useCallback((activeIdx: number, fraction: number) => {
+    if (!containerRef.current) return;
+    const dots = containerRef.current.querySelectorAll<HTMLElement>(`.${styles.tocDot}`);
+    if (dots.length === 0) return;
+
+    const firstDot = dots[0];
+    const lastDot = dots[dots.length - 1];
+
+    const firstCenter = firstDot.offsetTop + firstDot.offsetHeight / 2;
+    const lastCenter = lastDot.offsetTop + lastDot.offsetHeight / 2;
+    const totalTrack = Math.max(0, lastCenter - firstCenter);
+
+    setSpineTrackTop(firstCenter);
+    setSpineTrackHeight(totalTrack);
+
+    if (activeIdx >= dots.length - 1 || fraction >= 1) {
+      setSpineHeightPx(totalTrack);
+    } else {
+      const currentDot = dots[activeIdx];
+      const nextDot = dots[activeIdx + 1] || currentDot;
+
+      const currCenter = currentDot.offsetTop + currentDot.offsetHeight / 2;
+      const nextCenter = nextDot.offsetTop + nextDot.offsetHeight / 2;
+
+      const fill = (currCenter - firstCenter) + fraction * (nextCenter - currCenter);
+      setSpineHeightPx(Math.max(0, Math.min(totalTrack, fill)));
+    }
+  }, []);
+
+  const updateSyncState = useCallback(() => {
     if (isClickScrollingRef.current) return;
 
     const sections = visibleSectionsRef.current;
@@ -53,39 +101,74 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     const innerHeight = window.innerHeight;
     const scrollHeight = document.documentElement.scrollHeight;
 
-    // Check if reached bottom of page
-    if (scrollY + innerHeight >= scrollHeight - 60) {
-      const lastSection = sections[sections.length - 1];
-      if (lastSection) {
-        setActiveSection(lastSection.title);
-      }
+    // Check bottom of page
+    if (scrollY + innerHeight >= scrollHeight - 40) {
+      const last = sections[sections.length - 1];
+      if (last) setActiveSection(last.title);
+      setScrollProgress(100);
+      updateSpinePixels(sections.length - 1, 1);
       return;
     }
 
-    // Check if near the top
-    if (scrollY < 100) {
-      setActiveSection(sections[0].title);
-      return;
-    }
+    const isMobile = window.innerWidth <= 768;
+    const threshold = isMobile ? 32 : Math.max(100, Math.min(220, innerHeight * 0.25));
 
-    // Dynamic threshold based on viewport height (comfortably in upper third of screen)
-    const threshold = Math.max(140, Math.min(260, innerHeight * 0.3));
-    let current = sections[0].title;
-
-    for (const section of sections) {
-      const element = document.getElementById(section.title);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        if (rect.top <= threshold) {
-          current = section.title;
-        } else {
-          break;
-        }
+    const positions: { title: string; docTop: number }[] = [];
+    for (const sec of sections) {
+      const el = document.getElementById(sec.title);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        positions.push({
+          title: sec.title,
+          docTop: r.top + scrollY,
+        });
       }
     }
 
-    setActiveSection(current);
-  }, []);
+    if (positions.length === 0) return;
+
+    const currentTrigger = scrollY + threshold;
+
+    if (currentTrigger <= positions[0].docTop) {
+      setActiveSection(positions[0].title);
+      setScrollProgress(0);
+      updateSpinePixels(0, 0);
+      return;
+    }
+
+    let activeIdx = 0;
+    let fraction = 0;
+
+    for (let i = 0; i < positions.length - 1; i++) {
+      const currTop = positions[i].docTop;
+      const nextTop = positions[i + 1].docTop;
+
+      if (currentTrigger >= currTop && currentTrigger < nextTop) {
+        activeIdx = i;
+        const dist = nextTop - currTop;
+        fraction = dist > 0 ? (currentTrigger - currTop) / dist : 0;
+        break;
+      } else if (i === positions.length - 2 && currentTrigger >= nextTop) {
+        activeIdx = i + 1;
+        fraction = 1;
+      }
+    }
+
+    if (activeIdx >= positions.length - 1) {
+      activeIdx = positions.length - 1;
+      fraction = 1;
+    }
+
+    setActiveSection(positions[activeIdx].title);
+
+    const totalIntervals = Math.max(1, positions.length - 1);
+    const overallProgress = Math.min(
+      100,
+      Math.max(0, ((activeIdx + fraction) / totalIntervals) * 100)
+    );
+    setScrollProgress(overallProgress);
+    updateSpinePixels(activeIdx, fraction);
+  }, [updateSpinePixels]);
 
   useEffect(() => {
     let ticking = false;
@@ -93,14 +176,13 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          updateActiveSection();
+          updateSyncState();
           ticking = false;
         });
         ticking = true;
       }
     };
 
-    // If user initiates manual scroll or touch, immediately resume scroll tracking
     const handleUserInteraction = () => {
       cancelClickScroll();
     };
@@ -110,9 +192,11 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     window.addEventListener("touchmove", handleUserInteraction, { passive: true });
     window.addEventListener("pointerdown", handleUserInteraction, { passive: true });
     window.addEventListener("scrollend", handleUserInteraction, { passive: true });
+    window.addEventListener("resize", updateSyncState);
 
     // Initial check on mount
-    updateActiveSection();
+    setMounted(true);
+    updateSyncState();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -120,20 +204,45 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       window.removeEventListener("touchmove", handleUserInteraction);
       window.removeEventListener("pointerdown", handleUserInteraction);
       window.removeEventListener("scrollend", handleUserInteraction);
+      window.removeEventListener("resize", updateSyncState);
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
     };
-  }, [updateActiveSection, cancelClickScroll]);
+  }, [updateSyncState, cancelClickScroll]);
 
-  const scrollTo = (id: string, offset: number = 80) => {
+  // Gently scroll active mobile pill into view if compact bar is scrollable
+  useEffect(() => {
+    if (activeMobileItemRef.current) {
+      activeMobileItemRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [activeSection]);
+
+  const scrollTo = (id: string, defaultOffset: number = 80) => {
     const element = document.getElementById(id);
     if (element) {
       setActiveSection(id);
       isClickScrollingRef.current = true;
 
+      const isMobile = window.innerWidth <= 768;
+      const offset = isMobile ? 24 : defaultOffset;
+
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - offset;
+
+      // Immediately sync progress indicators to target section
+      const sections = visibleSectionsRef.current;
+      const targetIdx = sections.findIndex((s) => s.title === id);
+      if (targetIdx !== -1) {
+        const totalIntervals = Math.max(1, sections.length - 1);
+        const targetPercent = (targetIdx / totalIntervals) * 100;
+        setScrollProgress(targetPercent);
+        updateSpinePixels(targetIdx, 0);
+      }
 
       window.scrollTo({
         top: offsetPosition,
@@ -143,87 +252,158 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
-      // Re-enable scroll spy tracking after smooth scroll finishes
       scrollTimeoutRef.current = setTimeout(() => {
         isClickScrollingRef.current = false;
-        updateActiveSection();
-      }, 600);
+        updateSyncState();
+      }, 650);
     }
   };
 
   if (!about.tableOfContent.display) return null;
 
   return (
-    <Column
-      as="nav"
-      aria-label="Table of contents"
-      fitWidth
-      paddingTop="16"
-      gap="16"
-      style={{
-        whiteSpace: "nowrap",
-      }}
-      className={styles.tocNav}
-    >
-      {visibleSections.map((section, sectionIndex) => {
-        const isActive = activeSection === section.title;
-
-        return (
-          <Column key={sectionIndex} className={styles.tocSection}>
+    <>
+      {/* Desktop sidebar navigation with synced progress spine & progress bar */}
+      <div className={styles.tocNavDesktop}>
+        <div className={styles.tocSpineContainer} ref={containerRef}>
+          {/* Vertical progress spine connecting sections in exact pixel sync */}
+          <div
+            className={styles.tocSpineTrack}
+            style={{
+              top: `${spineTrackTop}px`,
+              height: spineTrackHeight > 0 ? `${spineTrackHeight}px` : "calc(100% - 28px)",
+            }}
+            aria-hidden="true"
+          >
             <div
-              role="button"
-              tabIndex={0}
-              aria-current={isActive ? "true" : undefined}
-              className={`${styles.tocItem} ${isActive ? styles.tocItemActive : ""}`}
-              onClick={() => scrollTo(section.title, 80)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  scrollTo(section.title, 80);
-                }
+              className={styles.tocSpineFill}
+              style={{
+                height: spineTrackHeight > 0 ? `${spineHeightPx}px` : `${scrollProgress}%`,
               }}
-            >
-              <span className={styles.tocDot} />
-              <span className={styles.tocLabelWrapper}>
-                <span className={styles.tocText}>{section.title}</span>
-                <span className={styles.tocUnderline} />
-              </span>
-            </div>
+            />
+          </div>
 
-            {about.tableOfContent.subItems && section.items.length > 0 && (
-              <Column gap="8">
-                {section.items.map((item, itemIndex) => {
-                  const isSubActive = activeSection === item;
+          <Column
+            as="nav"
+            aria-label="Table of contents"
+            fitWidth
+            gap="16"
+            style={{
+              whiteSpace: "nowrap",
+            }}
+            className={styles.tocNav}
+          >
+            {visibleSections.map((section, sectionIndex) => {
+              const isActive = activeSection === section.title;
 
+              return (
+                <Column key={sectionIndex} className={styles.tocSection}>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`${styles.tocItem} ${isActive ? styles.tocItemActive : ""}`}
+                    onClick={() => scrollTo(section.title, 80)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        scrollTo(section.title, 80);
+                      }
+                    }}
+                  >
+                    <span className={styles.tocDot} />
+                    <span className={styles.tocLabelWrapper}>
+                      <span className={styles.tocText}>{section.title}</span>
+                      <span className={styles.tocUnderline} />
+                    </span>
+                  </div>
+
+                  {about.tableOfContent.subItems && section.items.length > 0 && (
+                    <Column gap="8">
+                      {section.items.map((item, itemIndex) => {
+                        const isSubActive = activeSection === item;
+
+                        return (
+                          <div
+                            role="button"
+                            tabIndex={0}
+                            key={itemIndex}
+                            aria-current={isSubActive ? "true" : undefined}
+                            className={`${styles.tocSubItem} ${isSubActive ? styles.tocSubItemActive : ""}`}
+                            onClick={() => scrollTo(item, 80)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                scrollTo(item, 80);
+                              }
+                            }}
+                          >
+                            <span className={styles.tocSubDot} />
+                            <span className={styles.tocLabelWrapper}>
+                              <span className={styles.tocSubText}>{item}</span>
+                              <span className={styles.tocSubUnderline} />
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </Column>
+                  )}
+                </Column>
+              );
+            })}
+          </Column>
+        </div>
+      </div>
+
+      {/* Mobile compact floating navigation bar above main header */}
+      {(() => {
+        const mobileNav = (
+          <nav
+            aria-label="Compact page sections navigation"
+            className={styles.tocNavMobile}
+          >
+            <div className={styles.tocMobilePill}>
+              <div className={styles.tocMobileItems}>
+                {visibleSections.map((section) => {
+                  const isActive = activeSection === section.title;
                   return (
-                    <div
-                      role="button"
-                      tabIndex={0}
-                      key={itemIndex}
-                      aria-current={isSubActive ? "true" : undefined}
-                      className={`${styles.tocSubItem} ${isSubActive ? styles.tocSubItemActive : ""}`}
-                      onClick={() => scrollTo(item, 80)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          scrollTo(item, 80);
-                        }
-                      }}
+                    <button
+                      type="button"
+                      key={section.title}
+                      ref={isActive ? activeMobileItemRef : null}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`${styles.tocMobileItem} ${isActive ? styles.tocMobileItemActive : ""}`}
+                      onClick={() => scrollTo(section.title, 24)}
                     >
-                      <span className={styles.tocSubDot} />
-                      <span className={styles.tocLabelWrapper}>
-                        <span className={styles.tocSubText}>{item}</span>
-                        <span className={styles.tocSubUnderline} />
-                      </span>
-                    </div>
+                      {isActive && <span className={styles.tocMobileDot} />}
+                      <span>{getCompactTitle(section.title)}</span>
+                    </button>
                   );
                 })}
-              </Column>
-            )}
-          </Column>
+              </div>
+              <div
+                className={styles.tocMobileProgressTrack}
+                role="progressbar"
+                aria-valuenow={Math.round(scrollProgress)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Reading progress"
+              >
+                <div
+                  className={styles.tocMobileProgressBar}
+                  style={{ width: `${scrollProgress}%` }}
+                />
+              </div>
+            </div>
+          </nav>
         );
-      })}
-    </Column>
+
+        if (mounted && typeof document !== "undefined") {
+          return createPortal(mobileNav, document.body);
+        }
+        return mobileNav;
+      })()}
+    </>
   );
 };
 
