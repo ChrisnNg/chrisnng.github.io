@@ -40,7 +40,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   features,
 }) => {
   return (
-    <Column id={id} fillWidth gap="m" horizontal="center" className={styles.card}>
+    <Column
+      id={id}
+      style={{ scrollMarginTop: "100px" }}
+      fillWidth
+      gap="m"
+      horizontal="center"
+      className={styles.card}
+    >
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
         images={images.map((image) => ({
