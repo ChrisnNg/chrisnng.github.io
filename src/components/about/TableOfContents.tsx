@@ -44,7 +44,12 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     visibleSections[0]?.title || ""
   );
   const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [spineHeightPx, setSpineHeightPx] = useState<number>(0);
+  const [spineTrackTop, setSpineTrackTop] = useState<number>(14);
+  const [spineTrackHeight, setSpineTrackHeight] = useState<number>(0);
   const [mounted, setMounted] = useState<boolean>(false);
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const isClickScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const activeMobileItemRef = useRef<HTMLButtonElement | null>(null);
@@ -57,20 +62,36 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     }
   }, []);
 
-  const updateScrollProgress = useCallback(() => {
-    const scrollY = window.scrollY;
-    const innerHeight = window.innerHeight;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const maxScroll = scrollHeight - innerHeight;
-    if (maxScroll > 0) {
-      const progress = Math.min(100, Math.max(0, (scrollY / maxScroll) * 100));
-      setScrollProgress(progress);
+  const updateSpinePixels = useCallback((activeIdx: number, fraction: number) => {
+    if (!containerRef.current) return;
+    const dots = containerRef.current.querySelectorAll<HTMLElement>(`.${styles.tocDot}`);
+    if (dots.length === 0) return;
+
+    const firstDot = dots[0];
+    const lastDot = dots[dots.length - 1];
+
+    const firstCenter = firstDot.offsetTop + firstDot.offsetHeight / 2;
+    const lastCenter = lastDot.offsetTop + lastDot.offsetHeight / 2;
+    const totalTrack = Math.max(0, lastCenter - firstCenter);
+
+    setSpineTrackTop(firstCenter);
+    setSpineTrackHeight(totalTrack);
+
+    if (activeIdx >= dots.length - 1 || fraction >= 1) {
+      setSpineHeightPx(totalTrack);
     } else {
-      setScrollProgress(0);
+      const currentDot = dots[activeIdx];
+      const nextDot = dots[activeIdx + 1] || currentDot;
+
+      const currCenter = currentDot.offsetTop + currentDot.offsetHeight / 2;
+      const nextCenter = nextDot.offsetTop + nextDot.offsetHeight / 2;
+
+      const fill = (currCenter - firstCenter) + fraction * (nextCenter - currCenter);
+      setSpineHeightPx(Math.max(0, Math.min(totalTrack, fill)));
     }
   }, []);
 
-  const updateActiveSection = useCallback(() => {
+  const updateSyncState = useCallback(() => {
     if (isClickScrollingRef.current) return;
 
     const sections = visibleSectionsRef.current;
@@ -80,39 +101,74 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     const innerHeight = window.innerHeight;
     const scrollHeight = document.documentElement.scrollHeight;
 
-    // Check if reached bottom of page
-    if (scrollY + innerHeight >= scrollHeight - 60) {
-      const lastSection = sections[sections.length - 1];
-      if (lastSection) {
-        setActiveSection(lastSection.title);
-      }
+    // Check bottom of page
+    if (scrollY + innerHeight >= scrollHeight - 40) {
+      const last = sections[sections.length - 1];
+      if (last) setActiveSection(last.title);
+      setScrollProgress(100);
+      updateSpinePixels(sections.length - 1, 1);
       return;
     }
 
-    // Check if near the top
-    if (scrollY < 100) {
-      setActiveSection(sections[0].title);
-      return;
-    }
+    const isMobile = window.innerWidth <= 768;
+    const threshold = isMobile ? 32 : Math.max(100, Math.min(220, innerHeight * 0.25));
 
-    // Dynamic threshold based on viewport height (comfortably in upper third of screen)
-    const threshold = Math.max(140, Math.min(260, innerHeight * 0.3));
-    let current = sections[0].title;
-
-    for (const section of sections) {
-      const element = document.getElementById(section.title);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        if (rect.top <= threshold) {
-          current = section.title;
-        } else {
-          break;
-        }
+    const positions: { title: string; docTop: number }[] = [];
+    for (const sec of sections) {
+      const el = document.getElementById(sec.title);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        positions.push({
+          title: sec.title,
+          docTop: r.top + scrollY,
+        });
       }
     }
 
-    setActiveSection(current);
-  }, []);
+    if (positions.length === 0) return;
+
+    const currentTrigger = scrollY + threshold;
+
+    if (currentTrigger <= positions[0].docTop) {
+      setActiveSection(positions[0].title);
+      setScrollProgress(0);
+      updateSpinePixels(0, 0);
+      return;
+    }
+
+    let activeIdx = 0;
+    let fraction = 0;
+
+    for (let i = 0; i < positions.length - 1; i++) {
+      const currTop = positions[i].docTop;
+      const nextTop = positions[i + 1].docTop;
+
+      if (currentTrigger >= currTop && currentTrigger < nextTop) {
+        activeIdx = i;
+        const dist = nextTop - currTop;
+        fraction = dist > 0 ? (currentTrigger - currTop) / dist : 0;
+        break;
+      } else if (i === positions.length - 2 && currentTrigger >= nextTop) {
+        activeIdx = i + 1;
+        fraction = 1;
+      }
+    }
+
+    if (activeIdx >= positions.length - 1) {
+      activeIdx = positions.length - 1;
+      fraction = 1;
+    }
+
+    setActiveSection(positions[activeIdx].title);
+
+    const totalIntervals = Math.max(1, positions.length - 1);
+    const overallProgress = Math.min(
+      100,
+      Math.max(0, ((activeIdx + fraction) / totalIntervals) * 100)
+    );
+    setScrollProgress(overallProgress);
+    updateSpinePixels(activeIdx, fraction);
+  }, [updateSpinePixels]);
 
   useEffect(() => {
     let ticking = false;
@@ -120,15 +176,13 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          updateActiveSection();
-          updateScrollProgress();
+          updateSyncState();
           ticking = false;
         });
         ticking = true;
       }
     };
 
-    // If user initiates manual scroll or touch, immediately resume scroll tracking
     const handleUserInteraction = () => {
       cancelClickScroll();
     };
@@ -138,12 +192,11 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     window.addEventListener("touchmove", handleUserInteraction, { passive: true });
     window.addEventListener("pointerdown", handleUserInteraction, { passive: true });
     window.addEventListener("scrollend", handleUserInteraction, { passive: true });
-    window.addEventListener("resize", updateScrollProgress);
+    window.addEventListener("resize", updateSyncState);
 
     // Initial check on mount
     setMounted(true);
-    updateActiveSection();
-    updateScrollProgress();
+    updateSyncState();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -151,12 +204,12 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       window.removeEventListener("touchmove", handleUserInteraction);
       window.removeEventListener("pointerdown", handleUserInteraction);
       window.removeEventListener("scrollend", handleUserInteraction);
-      window.removeEventListener("resize", updateScrollProgress);
+      window.removeEventListener("resize", updateSyncState);
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
     };
-  }, [updateActiveSection, updateScrollProgress, cancelClickScroll]);
+  }, [updateSyncState, cancelClickScroll]);
 
   // Gently scroll active mobile pill into view if compact bar is scrollable
   useEffect(() => {
@@ -181,6 +234,16 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - offset;
 
+      // Immediately sync progress indicators to target section
+      const sections = visibleSectionsRef.current;
+      const targetIdx = sections.findIndex((s) => s.title === id);
+      if (targetIdx !== -1) {
+        const totalIntervals = Math.max(1, sections.length - 1);
+        const targetPercent = (targetIdx / totalIntervals) * 100;
+        setScrollProgress(targetPercent);
+        updateSpinePixels(targetIdx, 0);
+      }
+
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
@@ -189,12 +252,10 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
-      // Re-enable scroll spy tracking after smooth scroll finishes
       scrollTimeoutRef.current = setTimeout(() => {
         isClickScrollingRef.current = false;
-        updateActiveSection();
-        updateScrollProgress();
-      }, 600);
+        updateSyncState();
+      }, 650);
     }
   };
 
@@ -202,14 +263,23 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 
   return (
     <>
-      {/* Desktop sidebar navigation */}
+      {/* Desktop sidebar navigation with synced progress spine & progress bar */}
       <div className={styles.tocNavDesktop}>
-        <div className={styles.tocSpineContainer}>
-          {/* Vertical progress spine connecting sections */}
-          <div className={styles.tocSpineTrack} aria-hidden="true">
+        <div className={styles.tocSpineContainer} ref={containerRef}>
+          {/* Vertical progress spine connecting sections in exact pixel sync */}
+          <div
+            className={styles.tocSpineTrack}
+            style={{
+              top: `${spineTrackTop}px`,
+              height: spineTrackHeight > 0 ? `${spineTrackHeight}px` : "calc(100% - 28px)",
+            }}
+            aria-hidden="true"
+          >
             <div
               className={styles.tocSpineFill}
-              style={{ height: `${scrollProgress}%` }}
+              style={{
+                height: spineTrackHeight > 0 ? `${spineHeightPx}px` : `${scrollProgress}%`,
+              }}
             />
           </div>
 
