@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { Column } from "@/once-ui/components";
 import styles from "./about.module.scss";
 
@@ -43,6 +44,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     visibleSections[0]?.title || ""
   );
   const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [mounted, setMounted] = useState<boolean>(false);
   const isClickScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const activeMobileItemRef = useRef<HTMLButtonElement | null>(null);
@@ -139,6 +141,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
     window.addEventListener("resize", updateScrollProgress);
 
     // Initial check on mount
+    setMounted(true);
     updateActiveSection();
     updateScrollProgress();
 
@@ -272,44 +275,53 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       </Column>
 
       {/* Mobile compact floating navigation bar above main header */}
-      <nav
-        aria-label="Compact page sections navigation"
-        className={styles.tocNavMobile}
-      >
-        <div className={styles.tocMobilePill}>
-          <div className={styles.tocMobileItems}>
-            {visibleSections.map((section) => {
-              const isActive = activeSection === section.title;
-              return (
-                <button
-                  type="button"
-                  key={section.title}
-                  ref={isActive ? activeMobileItemRef : null}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`${styles.tocMobileItem} ${isActive ? styles.tocMobileItemActive : ""}`}
-                  onClick={() => scrollTo(section.title, 24)}
-                >
-                  {isActive && <span className={styles.tocMobileDot} />}
-                  <span>{getCompactTitle(section.title)}</span>
-                </button>
-              );
-            })}
-          </div>
-          <div
-            className={styles.tocMobileProgressTrack}
-            role="progressbar"
-            aria-valuenow={Math.round(scrollProgress)}
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-label="Reading progress"
+      {(() => {
+        const mobileNav = (
+          <nav
+            aria-label="Compact page sections navigation"
+            className={styles.tocNavMobile}
           >
-            <div
-              className={styles.tocMobileProgressBar}
-              style={{ width: `${scrollProgress}%` }}
-            />
-          </div>
-        </div>
-      </nav>
+            <div className={styles.tocMobilePill}>
+              <div className={styles.tocMobileItems}>
+                {visibleSections.map((section) => {
+                  const isActive = activeSection === section.title;
+                  return (
+                    <button
+                      type="button"
+                      key={section.title}
+                      ref={isActive ? activeMobileItemRef : null}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`${styles.tocMobileItem} ${isActive ? styles.tocMobileItemActive : ""}`}
+                      onClick={() => scrollTo(section.title, 24)}
+                    >
+                      {isActive && <span className={styles.tocMobileDot} />}
+                      <span>{getCompactTitle(section.title)}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div
+                className={styles.tocMobileProgressTrack}
+                role="progressbar"
+                aria-valuenow={Math.round(scrollProgress)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Reading progress"
+              >
+                <div
+                  className={styles.tocMobileProgressBar}
+                  style={{ width: `${scrollProgress}%` }}
+                />
+              </div>
+            </div>
+          </nav>
+        );
+
+        if (mounted && typeof document !== "undefined") {
+          return createPortal(mobileNav, document.body);
+        }
+        return mobileNav;
+      })()}
     </>
   );
 };
