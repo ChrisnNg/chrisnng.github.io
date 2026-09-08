@@ -20,7 +20,7 @@ export const ProjectImageCard: React.FC<ProjectImageProps> = ({
   delay = 2.3,
 }) => {
   return (
-    <SmartLink href="/work" style={{ textDecoration: "none" }}>
+    <SmartLink href="/work" fillWidth style={{ textDecoration: "none" }}>
       <Flex
         radius="l"
         className={`${styles.darkoverlay}`}
