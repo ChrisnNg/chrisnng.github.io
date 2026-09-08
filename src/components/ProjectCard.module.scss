@@ -1,5 +1,6 @@
 .card {
     position: relative;
+    overflow: hidden;
 }
 
 .viewDetails {
@@ -9,8 +10,14 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 10;
+    pointer-events: none;
+    background: var(--neutral-background-strong);
+    padding: 8px 16px;
+    border-radius: var(--radius-l);
+    border: 1px solid var(--neutral-border-medium);
 }
 
 .card:hover .viewDetails {
     opacity: 1;
+    pointer-events: auto;
 }
