@@ -172,6 +172,10 @@ const about = {
           <>CS50 Harvard&apos;s Introduction to Computer Science and Programming</>
         ),
       },
+      {
+        name: "CompTIA",
+        description: <>CompTIA Security+ ce Certification</>,
+      },
     ],
   },
   technical: {
