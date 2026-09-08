@@ -284,6 +284,13 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 
   if (!about.tableOfContent.display) return null;
 
+  const isSectionPassed = (sectionIndex: number) => {
+    if (scrollProgress <= 0) return false;
+    const totalIntervals = Math.max(1, visibleSections.length - 1);
+    const sectionTargetProgress = (sectionIndex / totalIntervals) * 100;
+    return scrollProgress >= sectionTargetProgress + 0.5;
+  };
+
   return (
     <>
       {/* Desktop sidebar navigation with synced progress spine & progress bar */}
@@ -320,6 +327,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
           >
             {visibleSections.map((section, sectionIndex) => {
               const isActive = activeSection === section.title;
+              const isPassed = isSectionPassed(sectionIndex);
 
               return (
                 <Column key={sectionIndex} className={styles.tocSection}>
@@ -336,7 +344,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                       }
                     }}
                   >
-                    <span className={styles.tocDot} />
+                    <span
+                      className={`${styles.tocDot} ${isPassed ? styles.tocDotPassed : ""}`}
+                    />
                     <span className={styles.tocLabelWrapper}>
                       <span className={styles.tocText}>{section.title}</span>
                       <span className={styles.tocUnderline} />
@@ -363,7 +373,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
                               }
                             }}
                           >
-                            <span className={styles.tocSubDot} />
+                            <span
+                              className={`${styles.tocSubDot} ${isPassed ? styles.tocSubDotPassed : ""}`}
+                            />
                             <span className={styles.tocLabelWrapper}>
                               <span className={styles.tocSubText}>{item}</span>
                               <span className={styles.tocSubUnderline} />

@@ -375,9 +375,17 @@
   border-radius: 50%;
   background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.3));
   flex-shrink: 0;
-  transition: transform var(--transition-micro-medium, 0.2s ease),
+  transition: opacity 0.25s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               background var(--transition-micro-medium, 0.2s ease),
               box-shadow var(--transition-micro-medium, 0.2s ease);
+}
+
+.tocDotPassed,
+.tocSubDotPassed {
+  opacity: 0 !important;
+  transform: scale(0) !important;
+  pointer-events: none;
 }
 
 .tocLabelWrapper {
@@ -472,7 +480,8 @@
   border-radius: 50%;
   background: var(--neutral-alpha-strong, rgba(255, 255, 255, 0.25));
   flex-shrink: 0;
-  transition: transform var(--transition-micro-medium, 0.2s ease),
+  transition: opacity 0.25s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               background var(--transition-micro-medium, 0.2s ease),
               box-shadow var(--transition-micro-medium, 0.2s ease);
 }
