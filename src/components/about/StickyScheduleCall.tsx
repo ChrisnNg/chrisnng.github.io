@@ -36,6 +36,7 @@ export function StickyScheduleCall({
 
   return (
     <Flex
+      hide="s"
       horizontal="center"
       fillWidth
       style={{

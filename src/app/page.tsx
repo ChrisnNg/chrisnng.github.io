@@ -139,9 +139,9 @@ export default function About() {
           <Column
             id={about.intro.title}
             fillWidth
-            minHeight="160"
             vertical="center"
             marginBottom="32"
+            className={styles.introHeader}
           >
             {about.calendar.display && (
               <Flex

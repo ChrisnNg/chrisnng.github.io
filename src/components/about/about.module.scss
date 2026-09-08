@@ -12,9 +12,21 @@
   top: var(--static-space-64);
 }
 
+.introHeader {
+  min-height: 160px;
+}
+
 @media (--s) {
   .avatar {
     top: auto;
+    padding-bottom: 0 !important;
+    gap: var(--static-space-12) !important;
+  }
+
+  .introHeader {
+    min-height: auto !important;
+    margin-top: var(--static-space-12) !important;
+    margin-bottom: var(--static-space-24) !important;
   }
 
   .textAlign {
