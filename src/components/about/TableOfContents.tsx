@@ -353,26 +353,6 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
             })}
           </Column>
         </div>
-
-        {/* Scroll progress bar beneath the sidebar navigation */}
-        <div
-          className={styles.tocProgressFooter}
-          role="progressbar"
-          aria-valuenow={Math.round(scrollProgress)}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label="Sidebar scroll progress"
-        >
-          <div className={styles.tocProgressLineTrack}>
-            <div
-              className={styles.tocProgressLineFill}
-              style={{ width: `${scrollProgress}%` }}
-            />
-          </div>
-          <span className={styles.tocProgressText}>
-            {Math.round(scrollProgress)}%
-          </span>
-        </div>
       </div>
 
       {/* Mobile compact floating navigation bar above main header */}
