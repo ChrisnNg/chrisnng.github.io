@@ -1,9 +1,16 @@
 .card {
-    .viewDetails {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    &:hover .viewDetails {
-        opacity: 1;
-    }
+    position: relative;
+}
+
+.viewDetails {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.card:hover .viewDetails {
+    opacity: 1;
 }

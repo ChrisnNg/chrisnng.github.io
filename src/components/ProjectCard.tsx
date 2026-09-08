@@ -46,6 +46,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           alt: title,
         }))}
       />
+      
+      {/* View Details Link placed absolutely in the card container */}
+      {href && (
+          <SmartLink
+              className={styles.viewDetails}
+              suffixIcon="arrowRight"
+              style={{ margin: "0", width: "fit-content" }}
+              href={href}
+          >
+              <Text variant="body-default-s">View Details</Text>
+          </SmartLink>
+      )}
+
       <Column
         fillWidth
         horizontal="center"
@@ -102,7 +115,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </Flex>
         )}
 
-        {(link || hostedsite || href) && (
+        {(link || hostedsite) && (
           <Flex gap="16" wrap paddingTop="4" horizontal="center">
             {link && (
               <SmartLink
@@ -121,16 +134,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               >
                 <Text variant="body-default-s">View site</Text>
               </SmartLink>
-            )}
-            {href && (
-                <SmartLink
-                    className={styles.viewDetails}
-                    suffixIcon="arrowRight"
-                    style={{ margin: "0", width: "fit-content" }}
-                    href={href}
-                >
-                    <Text variant="body-default-s">View Details</Text>
-                </SmartLink>
             )}
           </Flex>
         )}
