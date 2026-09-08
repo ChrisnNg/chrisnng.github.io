@@ -127,6 +127,122 @@
   align-self: center;
 }
 
+.tocNavDesktop {
+  @media (--s) {
+    display: none !important;
+  }
+}
+
+.tocNavMobile {
+  display: none !important;
+
+  @media (--s) {
+    display: flex !important;
+    position: fixed;
+    bottom: calc(var(--static-space-24) + 48px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+    padding: 0 var(--static-space-12);
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease;
+  }
+}
+
+.tocMobilePill {
+  pointer-events: auto;
+  user-select: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface-background, rgba(18, 18, 18, 0.85));
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: var(--radius-m-4, 18px);
+  box-shadow: var(--shadow-l, 0 8px 32px rgba(0, 0, 0, 0.4));
+  padding: 3px 6px 4px 6px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.tocMobileItems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--static-space-2, 2px);
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tocMobileItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-m-2, 12px);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: var(--font-size-label-s, 12px);
+  font-family: var(--font-family-body, inherit);
+  color: var(--neutral-on-background-weak, rgba(255, 255, 255, 0.6));
+  transition: background 0.2s ease, color 0.2s ease;
+  outline: none;
+  border: none;
+  background: transparent;
+
+  &:hover {
+    color: var(--neutral-on-background-strong, #ffffff);
+    background: var(--neutral-alpha-weak);
+  }
+}
+
+.tocMobileItemActive {
+  background: var(--brand-alpha-weak, rgba(16, 185, 129, 0.15));
+  color: var(--brand-on-background-strong, #ffffff);
+  font-weight: var(--font-weight-heading-strong, 600);
+
+  &:hover {
+    background: var(--brand-alpha-weak, rgba(16, 185, 129, 0.22));
+    color: var(--brand-on-background-strong, #ffffff);
+  }
+}
+
+.tocMobileDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--brand-solid-strong, #10b981);
+  box-shadow: 0 0 6px var(--brand-alpha-strong, rgba(16, 185, 129, 0.6));
+  flex-shrink: 0;
+}
+
+.tocMobileProgressTrack {
+  width: calc(100% - 12px);
+  height: 2.5px;
+  background: var(--neutral-alpha-weak, rgba(255, 255, 255, 0.12));
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.tocMobileProgressBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-solid-weak, #059669), var(--brand-solid-strong, #10b981));
+  box-shadow: 0 0 6px var(--brand-alpha-strong, rgba(16, 185, 129, 0.5));
+  border-radius: 2px;
+  transition: width 0.12s ease-out;
+}
+
 .tocSection {
   display: flex;
   flex-direction: column;
