@@ -31,9 +31,12 @@ export const Footer = () => {
             <SmartLink
               href="/attributions"
               unstyled
-              className={"neutral-weak" + styles.attribute}
+              className="neutral-weak"
+              selected
             >
-              cc attributions
+              <text style={{ color: "#595959 !important" }}>
+                cc attributions
+              </text>
             </SmartLink>
           </Text>
         </Text>
